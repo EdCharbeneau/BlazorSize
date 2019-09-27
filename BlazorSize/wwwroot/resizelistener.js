@@ -13,7 +13,13 @@
         };
 
         // set onresize handler
-        window.onresize = handleResized;
+        var resizeWindow;
+        window.onresize = function () {
+            clearTimeout(resizeWindow);
+            resizeWindow = setTimeout(function () {
+                handleResized();
+            }, 300);
+        };
 
         // report browser's initial values
         handleResized();
