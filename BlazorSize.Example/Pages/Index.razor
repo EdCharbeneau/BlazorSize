@@ -1,5 +1,5 @@
-﻿@page "/"
-@inject IJSRuntime jsRuntime
+﻿@inject ResizeListener listener
+@page "/"
 
 <h3>Height: @browser.Height</h3>
 <h3>Width: @browser.Width</h3>
@@ -7,14 +7,13 @@
 
 @code {
 
-    ResizeListener listener;
     BrowserWindowSize browser = new BrowserWindowSize();
-
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+
         if (firstRender)
         {
-            listener = new ResizeListener(jsRuntime);
             await listener.WatchResize(
                 (browserWindowSize) =>
                 {
