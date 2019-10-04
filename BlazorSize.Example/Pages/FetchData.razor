@@ -1,0 +1,45 @@
+﻿@inject ResizeListener listener
+@page "/fetchdata"
+
+@using BlazorSize.Example.Data
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates adaptive rendering of a Blazor UI.</p>
+
+@if (browser.MediaQueryMatched)
+{
+    <WeatherGrid Data="forecasts"></WeatherGrid>
+}
+else
+{
+    <WeatherCards Data="forecasts"></WeatherCards>
+}
+
+@code {
+    WeatherForecast[] forecasts;
+
+    BrowserWindowSize browser = new BrowserWindowSize();
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            await listener.WatchResize(
+                (browserWindowSize) =>
+                {
+                    browser = browserWindowSize;
+                    StateHasChanged();
+                }
+                ,
+                "(min-width: 768px)");
+        }
+    }
+}

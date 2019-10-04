@@ -1,0 +1,28 @@
+﻿@using BlazorSize.Example.Data
+
+@if (Data == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    foreach (var forecast in Data)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@forecast.Date.DayOfWeek</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@forecast.Date.ToShortDateString()</h6>
+                <p class="card-text">
+                    @forecast.TemperatureC (C) / @forecast.TemperatureF (F)
+                </p>
+                <p class="card-text">
+                    @forecast.Summary
+                </p>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    [Parameter] public WeatherForecast[] Data { get; set; }
+}
