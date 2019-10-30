@@ -1,9 +1,10 @@
-﻿namespace BlazorSize
+﻿using System;
+
+namespace BlazorSize
 {
-    public class BrowserWindowSize
+    public class BrowserWindowSize : EventArgs
     {
         public int Height { get; set; }
         public int Width { get; set; }
-        public bool MediaQueryMatched { get; set; }
     }
 }

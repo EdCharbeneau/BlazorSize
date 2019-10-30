@@ -6,23 +6,68 @@ namespace BlazorSize
 {
     public class ResizeListener
     {
-        private Action<BrowserWindowSize> OnResized;
+        const string ns = "blazorSize";
+        private readonly IJSRuntime jsRuntime;
+        private bool disposed;
+        private EventHandler<BrowserWindowSize>? onResized;
+        public ResizeListener(IJSRuntime jsRuntime) => (this.jsRuntime) = (jsRuntime);
 
-        private readonly IJSRuntime _jsRuntime;
-
-        public ResizeListener(IJSRuntime jsRuntime)
+        public event EventHandler<BrowserWindowSize>? OnResized
         {
-            _jsRuntime = jsRuntime;
+            add => Subscribe(value);
+            remove => Unsubscribe(value);
         }
-        public async ValueTask<bool> WatchResize(Action<BrowserWindowSize> onResize, string mediaQuery)
-        {
-            OnResized = onResize;
 
-            return await _jsRuntime.InvokeAsync<bool>("resizeListener.watchOnResize", DotNetObjectReference.Create(this), mediaQuery);
+        private void Unsubscribe(EventHandler<BrowserWindowSize> value)
+        {
+            onResized -= value;
+            if (onResized == null)
+            {
+                Cancel().ConfigureAwait(false);
+            }
         }
+
+        private void Subscribe(EventHandler<BrowserWindowSize> value)
+        {
+            if (onResized == null)
+            {
+                Start().ConfigureAwait(false);
+            }
+            onResized += value;
+        }
+
+        private async ValueTask<bool> Start() =>
+            await jsRuntime.InvokeAsync<bool>($"{ns}.listenForResize", DotNetObjectReference.Create(this));
+
+        private async ValueTask Cancel() =>
+            await jsRuntime.InvokeVoidAsync($"{ns}.cancelListener");
+
+        public async ValueTask<bool> MatchMedia(string mediaQuery) =>
+            await jsRuntime.InvokeAsync<bool>($"{ns}.matchMedia", mediaQuery);
+
+        public async ValueTask<BrowserWindowSize> GetBrowserWindowSize() =>
+            await jsRuntime.InvokeAsync<BrowserWindowSize>($"{ns}.getBrowserWindowSize");
 
         [JSInvokable]
-        public void RaiseOnResized(BrowserWindowSize browserWindowSize) => OnResized?.Invoke(browserWindowSize);
+        public void RaiseOnResized(BrowserWindowSize browserWindowSize) => 
+            onResized?.Invoke(this, browserWindowSize);
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    onResized = null;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

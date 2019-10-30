@@ -4,12 +4,38 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <LangVersion>8.0</LangVersion>
+    <Version>1.0.3.1</Version>
+    <Authors>Ed Charbeneau</Authors>
+    <Company>EdCharbeneau.com</Company>
+    <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/EdCharbeneau/BlazorSize</PackageProjectUrl>
+    <PackageIcon>blazor-glove-128.jpg</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
+    <PackageTags>Blazor, JavaScript Interop</PackageTags>
+    <PackageReleaseNotes>Pre-release</PackageReleaseNotes>
+    <AssemblyVersion>1.0.3.1</AssemblyVersion>
+    <FileVersion>1.0.3.1</FileVersion>
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\_resources\blazor-glove-128.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

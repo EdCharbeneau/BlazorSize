@@ -1,4 +1,5 @@
 ﻿@inject ResizeListener listener
+@implements IDisposable
 @page "/fetchdata"
 
 @using BlazorSize.Example.Data
@@ -8,7 +9,7 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-@if (browser.MediaQueryMatched)
+@if (IsSmallMedia)
 {
     <WeatherGrid Data="forecasts"></WeatherGrid>
 }
@@ -22,24 +23,32 @@ else
 
     BrowserWindowSize browser = new BrowserWindowSize();
 
+    bool IsSmallMedia = false;
+
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
 
         if (firstRender)
         {
-            await listener.WatchResize(
-                (browserWindowSize) =>
-                {
-                    browser = browserWindowSize;
-                    StateHasChanged();
-                }
-                ,
-                "(min-width: 768px)");
+            listener.OnResized += WindowResized;
         }
     }
+
+    void IDisposable.Dispose()
+    {
+        listener.OnResized -= WindowResized;
+    }
+
+    async void WindowResized(object _, BrowserWindowSize window)
+    {
+        browser = window;
+        IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
+        StateHasChanged();
+    }
+
 }
