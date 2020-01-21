@@ -9,14 +9,15 @@ namespace BlazorSize
         const string ns = "blazorSize";
         private readonly IJSRuntime jsRuntime;
         private bool disposed;
-        private EventHandler<BrowserWindowSize>? onResized;
         public ResizeListener(IJSRuntime jsRuntime) => (this.jsRuntime) = (jsRuntime);
-
+#nullable enable
+        private EventHandler<BrowserWindowSize>? onResized;
         public event EventHandler<BrowserWindowSize>? OnResized
         {
             add => Subscribe(value);
             remove => Unsubscribe(value);
         }
+#nullable disable
 
         private void Unsubscribe(EventHandler<BrowserWindowSize> value)
         {
@@ -49,7 +50,7 @@ namespace BlazorSize
             await jsRuntime.InvokeAsync<BrowserWindowSize>($"{ns}.getBrowserWindowSize");
 
         [JSInvokable]
-        public void RaiseOnResized(BrowserWindowSize browserWindowSize) => 
+        public void RaiseOnResized(BrowserWindowSize browserWindowSize) =>
             onResized?.Invoke(this, browserWindowSize);
 
         protected virtual void Dispose(bool disposing)
