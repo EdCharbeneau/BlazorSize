@@ -2,6 +2,22 @@ BlazorSize is a JavaScript interop library for Blazor that is used to detect the
 
 BlazorSize was designed to allow Razor Components to implment adaptive rendering. Be sure to exhaust media queries as an option before using BlazorSize as your method of handling mobile/desktop rendering changes.
 
+## Add the NuGet package 
+
+**Package Manager**
+```bash
+Install-Package BlazorPro.BlazorSize -Version 1.2.0
+```
+
+**CLI**
+```bash
+dotnet add package BlazorPro.BlazorSize --version 1.2.0
+```
+**.csproj**
+```html
+<PackageReference Include="BlazorPro.BlazorSize" Version="1.2.0" />
+```
+
 ## Reference the JavaScript interop
 
 Add the JavaScript interop to your application's index.html or _hosts.cshtml
