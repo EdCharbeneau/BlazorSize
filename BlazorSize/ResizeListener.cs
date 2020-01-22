@@ -19,6 +19,10 @@ namespace BlazorPro.BlazorSize
 
 #nullable enable
         private EventHandler<BrowserWindowSize>? onResized;
+
+        /// <summary>
+        /// Subscribe to the browsers resize() event.
+        /// </summary>
         public event EventHandler<BrowserWindowSize>? OnResized
         {
             add => Subscribe(value);
@@ -50,12 +54,25 @@ namespace BlazorPro.BlazorSize
         private async ValueTask Cancel() =>
             await jsRuntime.InvokeVoidAsync($"{ns}.cancelListener");
 
+        /// <summary>
+        /// Determine if the Document matches the provided media query.
+        /// </summary>
+        /// <param name="mediaQuery"></param>
+        /// <returns>Returns true if matched.</returns>
         public async ValueTask<bool> MatchMedia(string mediaQuery) =>
             await jsRuntime.InvokeAsync<bool>($"{ns}.matchMedia", mediaQuery);
 
+        /// <summary>
+        /// Get the current BrowserWindowSize, this includes the Height and Width of the document.
+        /// </summary>
+        /// <returns></returns>
         public async ValueTask<BrowserWindowSize> GetBrowserWindowSize() =>
             await jsRuntime.InvokeAsync<BrowserWindowSize>($"{ns}.getBrowserWindowSize");
 
+        /// <summary>
+        /// Invoked by jsInterop, use the OnResized event handler to subscribe.
+        /// </summary>
+        /// <param name="browserWindowSize"></param>
         [JSInvokable]
         public void RaiseOnResized(BrowserWindowSize browserWindowSize) =>
             onResized?.Invoke(this, browserWindowSize);
