@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlazorSize
+namespace BlazorPro.BlazorSize
 {
     public class BrowserWindowSize : EventArgs
     {

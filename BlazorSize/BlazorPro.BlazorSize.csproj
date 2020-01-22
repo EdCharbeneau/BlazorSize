@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.3.1</Version>
+    <Version>1.2</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -15,15 +15,21 @@
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
-    <PackageReleaseNotes>Pre-release</PackageReleaseNotes>
-    <AssemblyVersion>1.0.3.1</AssemblyVersion>
-    <FileVersion>1.0.3.1</FileVersion>
+    <PackageReleaseNotes>Full-release</PackageReleaseNotes>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
   </ItemGroup>
 
 
@@ -32,6 +38,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="compilerconfig.json" />
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

@@ -1,4 +1,4 @@
-﻿namespace BlazorSize
+﻿namespace BlazorPro.BlazorSize
 {
     public static class Breakpoints
     {

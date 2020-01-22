@@ -1,4 +1,5 @@
-﻿@inject ResizeListener listener
+﻿@implements IDisposable
+@inject ResizeListener listener
 @page "/"
 
 <h3>Height: @browser.Height</h3>
@@ -22,15 +23,15 @@
         }
     }
 
-    //void IDisposable.Dispose()
-    //{
-    //    listener.OnResized -= WindowResizedA;
-    //}
+    void IDisposable.Dispose()
+    {
+        listener.OnResized -= WindowResizedA;
+    }
 
     async void WindowResizedA(object _, BrowserWindowSize window)
     {
         browser = window;
-        IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
+        IsSmallMedia = await listener.MatchMedia(Breakpoints.XLargeUp);
         StateHasChanged();
     }
 

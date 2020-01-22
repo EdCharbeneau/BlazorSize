@@ -1,3 +1,4 @@
+using BlazorPro.BlazorSize;
 using BlazorSize.Example.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,12 @@ namespace BlazorSize.Example
             {
                 o.DetailedErrors = true;
             });
+            //services.AddResizeListener(options =>
+            //                            {
+            //                                options.ReportRate = 300;
+            //                                options.EnableLogging = true;
+            //                                options.SuppressInitEvent = true;
+            //                            });
             services.AddScoped<ResizeListener>();
             services.AddScoped<WeatherForecastService>();
         }

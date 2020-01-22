@@ -1,15 +1,22 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorSize
+namespace BlazorPro.BlazorSize
 {
     public class ResizeListener
     {
         const string ns = "blazorSize";
         private readonly IJSRuntime jsRuntime;
+        private readonly ResizeOptions options;
         private bool disposed;
-        public ResizeListener(IJSRuntime jsRuntime) => (this.jsRuntime) = (jsRuntime);
+        public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
+        {
+            this.options = options.Value ?? new ResizeOptions();
+            this.jsRuntime = jsRuntime;
+        }
+
 #nullable enable
         private EventHandler<BrowserWindowSize>? onResized;
         public event EventHandler<BrowserWindowSize>? OnResized
@@ -38,7 +45,7 @@ namespace BlazorSize
         }
 
         private async ValueTask<bool> Start() =>
-            await jsRuntime.InvokeAsync<bool>($"{ns}.listenForResize", DotNetObjectReference.Create(this));
+            await jsRuntime.InvokeAsync<bool>($"{ns}.listenForResize", DotNetObjectReference.Create(this), options);
 
         private async ValueTask Cancel() =>
             await jsRuntime.InvokeVoidAsync($"{ns}.cancelListener");

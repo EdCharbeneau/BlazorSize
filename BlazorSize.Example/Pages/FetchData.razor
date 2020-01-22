@@ -39,16 +39,17 @@ else
         }
     }
 
-    void IDisposable.Dispose()
-    {
-        listener.OnResized -= WindowResized;
-    }
 
     async void WindowResized(object _, BrowserWindowSize window)
     {
         browser = window;
         IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
         StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        listener.OnResized -= WindowResized;
     }
 
 }

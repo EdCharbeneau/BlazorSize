@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorSize\BlazorSize.csproj" />
+    <ProjectReference Include="..\BlazorSize\BlazorPro.BlazorSize.csproj" />
   </ItemGroup>
 
 </Project>
