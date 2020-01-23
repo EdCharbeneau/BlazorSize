@@ -130,9 +130,9 @@ else
 
 ## Helpers
 
-```csharp
+Common media queries are already included as helpers to keep you out of the Bootstrap docs. Stay in your code longer and write cleaner statements too!
 
-The Breakpoints class defines common media query strings.
+```csharp
 
 /// @media(min-width: 576px) { ... }
 /// Small devices (landscape phones, 576px and up)
@@ -155,41 +155,42 @@ IsXLargeUpMedia = await listener.MatchMedia(Breakpoints.XLargeUp);
 
 /// Extra small devices (portrait phones, less than 576px)
 /// @media(max-width: 575.98px) { ... }
-Breakpoints.XSmallDown
+IsXSmallDown = await listener.MatchMedia(Breakpoints.XSmallDown);
 
 /// Small devices (landscape phones, less than 768px)
 /// @media(max-width: 767.98px) { ... }
-Breakpoints.SmallDown
+IsSmallDown = = await listener.MatchMedia(Breakpoints.SmallDown);
 
 /// Medium devices (tablets, less than 992px)
 /// @media(max-width: 991.98px) { ... }
-Breakpoints.MediumDown
+IsMediumDown = = await listener.MatchMedia(Breakpoints.MediumDown);
 
 /// Large devices (desktops, less than 1200px)
 /// @media(max-width: 1199.98px) { ... }
-Breakpoints.LargeDown
+LargeDown = = await listener.MatchMedia(Breakpoints.LargeDown);
 
 /// Small devices (landscape phones, 576px and up)
 /// @media(min-width: 576px) and(max-width: 767.98px) { ... }
-Breakpoints.OnlySmall
+IsSmallOnly = = await listener.MatchMedia(Breakpoints.OnlySmall);
 
 /// Medium devices (tablets, 768px and up)
 /// @media(min-width: 768px) and(max-width: 991.98px) { ... }
-Breakpoints.OnlyMedium
+IsMediumOnly = = await listener.MatchMedia(Breakpoints.OnlyMedium);
 
 /// Large devices (desktops, 992px and up)
 /// @media(min-width: 992px) and(max-width: 1199.98px) { ... }
-Breakpoints.OnlyLarge
+IsOnlyLarge = = await listener.MatchMedia(Breakpoints.OnlyLarge);
 
 /// <summary>
 /// Combines two media queries with the `and` keyword.
 /// Values must include parenthesis.
 /// Ex: (min-width: 992px) and (max-width: 1199.98px)
-Between(string min, string max)
+Breakpoints.Between(string min, string max)
 
 Example:
-string BetweenMediumAndLargeOnly => Between(Breakpoints.MediumUp, LargeDown);
-
+string BetweenMediumAndLargeOnly => Breakpoints.Between(Breakpoints.MediumUp, Breakpoints.LargeDown);
 // out: "(min-width: 768px) and (max-width: 1199.98px)"
+
+IsBetweenMediumAndLargeOnly = await listener.MatchMedia(BetweenMediumAndLargeOnly);
 
 ```
