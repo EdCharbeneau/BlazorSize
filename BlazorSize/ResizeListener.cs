@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public class ResizeListener
+    public class ResizeListener : IDisposable
     {
         const string ns = "blazorSize";
         private readonly IJSRuntime jsRuntime;
