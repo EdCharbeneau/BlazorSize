@@ -6,16 +6,16 @@ BlazorSize was designed to allow Razor Components to implment adaptive rendering
 
 **Package Manager**
 ```bash
-Install-Package BlazorPro.BlazorSize -Version 1.2.0
+Install-Package BlazorPro.BlazorSize 
 ```
 
 **CLI**
 ```bash
-dotnet add package BlazorPro.BlazorSize --version 1.2.0
+dotnet add package BlazorPro.BlazorSize 
 ```
 **.csproj**
 ```html
-<PackageReference Include="BlazorPro.BlazorSize" Version="1.2.0" />
+<PackageReference Include="BlazorPro.BlazorSize" Version="1.*" />
 ```
 
 ## Reference the JavaScript interop
