@@ -26,13 +26,13 @@ namespace BlazorSize.Example
             {
                 o.DetailedErrors = true;
             });
-            //services.AddResizeListener(options =>
-            //                            {
-            //                                options.ReportRate = 300;
-            //                                options.EnableLogging = true;
-            //                                options.SuppressInitEvent = true;
-            //                            });
-            services.AddScoped<ResizeListener>();
+            services.AddResizeListener(options =>
+                                        {
+                                            options.ReportRate = 300;
+                                            options.EnableLogging = true;
+                                            options.SuppressInitEvent = false;
+                                        });
+            //services.AddScoped<ResizeListener>();
             services.AddScoped<WeatherForecastService>();
         }
 

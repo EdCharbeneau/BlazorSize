@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorSize\BlazorPro.BlazorSize.csproj" />
+    <ProjectReference Include="..\TestComponents\TestComponents.csproj" />
   </ItemGroup>
 
 </Project>

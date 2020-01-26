@@ -1,10 +1,9 @@
-﻿@inject ResizeListener listener
+﻿@inject HttpClient Http
+@inject ResizeListener listener
 @implements IDisposable
 @using TestComponents
 @page "/fetchdata"
 
-@using BlazorSize.Example.Data
-@inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
 
@@ -28,7 +27,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -36,12 +35,11 @@ else
 
         if (firstRender)
         {
-            listener.OnResized += WindowResized;
+            listener.OnResized += WindowResizedA;
         }
     }
 
-
-    async void WindowResized(object _, BrowserWindowSize window)
+    async void WindowResizedA(object _, BrowserWindowSize window)
     {
         browser = window;
         IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
@@ -50,7 +48,9 @@ else
 
     void IDisposable.Dispose()
     {
-        listener.OnResized -= WindowResized;
+        listener.OnResized -= WindowResizedA;
     }
 
 }
+
+

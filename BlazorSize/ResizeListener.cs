@@ -43,7 +43,7 @@ namespace BlazorPro.BlazorSize
         {
             if (onResized == null)
             {
-                Start().ConfigureAwait(false);
+                Task.Run(async () => await Start());
             }
             onResized += value;
         }

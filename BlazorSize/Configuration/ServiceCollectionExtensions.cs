@@ -13,10 +13,7 @@ namespace BlazorPro.BlazorSize
         public static IServiceCollection AddResizeListener(this IServiceCollection services,
             Action<ResizeOptions> configure)
         {
-            var options = new ResizeOptions();
-
             services.AddScoped<ResizeListener>();
-
             services.Configure(configure);
             return services;
         }
