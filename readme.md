@@ -22,8 +22,8 @@ dotnet add package BlazorPro.BlazorSize
 
 Add the JavaScript interop to your application's index.html or _hosts.cshtml
 ```html
-    <!-- <script src="_content/BlazorPro.BlazorSize/blazorSize.js"></script> -->
-    <script src="_content/BlazorPro.BlazorSize/blazorSize.min.js"></script>
+    <!-- <script src="_content/BlazorSize/blazorSize.js"></script> -->
+    <script src="_content/BlazorSize/blazorSize.min.js"></script>
 ```
 
 ## Configure DI
