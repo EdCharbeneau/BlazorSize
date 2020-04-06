@@ -71,13 +71,13 @@ This example shows how to get the browsers width/height and check for media quer
 
 @if (IsSmallMedia)
 {
-	<!-- Display a full data grid on larger devices -->
-    <WeatherGrid Data="forecasts"></WeatherGrid>
+	<!-- Display a card layout on small devices -->
+    <WeatherCards Data="forecasts"></WeatherCards>
 }
 else
 {
-	<!-- Display a card layout on small devices -->
-    <WeatherCards Data="forecasts"></WeatherCards>
+	<!-- Display a full data grid on larger devices -->
+    <WeatherGrid Data="forecasts"></WeatherGrid>
 }
 
 @code {
@@ -119,7 +119,7 @@ else
         browser = window;
 
 		// Check a media query to see if it was matched. We can do this at any time, but it's best to check on each resize
-        IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
+        IsSmallMedia = await listener.MatchMedia(Breakpoints.SmallDown);
 
 		// We're outside of the component's lifecycle, be sure to let it know it has to re-render.
         StateHasChanged();

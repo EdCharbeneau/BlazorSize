@@ -11,11 +11,11 @@
 
 @if (IsSmallMedia)
 {
-    <WeatherGrid Data="forecasts"></WeatherGrid>
+    <WeatherCards Data="forecasts"></WeatherCards>
 }
 else
 {
-    <WeatherCards Data="forecasts"></WeatherCards>
+    <WeatherGrid Data="forecasts"></WeatherGrid>
 }
 
 @code {
@@ -42,7 +42,7 @@ else
     async void WindowResizedA(object _, BrowserWindowSize window)
     {
         browser = window;
-        IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
+        IsSmallMedia = await listener.MatchMedia(Breakpoints.SmallDown);
         StateHasChanged();
     }
 
