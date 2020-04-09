@@ -1,5 +1,5 @@
 ﻿@inject HttpClient Http
-@inject IJSRuntime js
+@inject MediaQueryListener mql
 @using TestComponents
 @using BlazorPro.BlazorSize.MediaQuery
 @page "/fetchdata"
@@ -9,7 +9,7 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-@if (IsMqlSmallMedia)
+@if (smallMedia.Matches)
 {
     <WeatherCards Data="forecasts"></WeatherCards>
 }
@@ -18,34 +18,15 @@ else
     <WeatherGrid Data="forecasts"></WeatherGrid>
 }
 
-<ul class="list-group">
-    <li class="list-group-item @(IsMqlSmallMedia ? "active": "")">Phone Size</li>
-    <li class="list-group-item @(IsMqlMediumMedia ? "active": "")">Tablet Size</li>
-    <li class="list-group-item @(IsMqlLargeMedia? "active": "")">Desktop Size</li>
-</ul>
+@smallMedia.Media
+@smallMedia.Matches
+@Message 
 
-<ul>
-    @foreach (var item in initialState)
-    {
-    <li>
-        @item.Key
-        <span>:</span>
-        @Breakpoints.OnlyMedium <span>=</span> @(item.Key == Breakpoints.OnlyMedium)
-    </li>
-    }
-
-</ul>
 @code {
     WeatherForecast[] forecasts;
-
-    MediaQueryList mql;
-
-    bool IsMqlSmallMedia;
-    bool IsMqlMediumMedia;
-    bool IsMqlLargeMedia;
-
-
-    Dictionary<string, bool> initialState = new Dictionary<string, bool>();
+    MediaQueryListItem smallMedia = new MediaQueryListItem(Breakpoints.SmallDown);
+    MediaQueryListItem largeMedia = new MediaQueryListItem(Breakpoints.LargeUp);
+    string Message = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,17 +38,24 @@ else
 
         if (firstRender)
         {
-            mql = new MediaQueryList(js);
-            await mql.AddMediaQueryListener(Breakpoints.OnlyMedium, HandleMedium);
-            await mql.AddMediaQueryListener(Breakpoints.SmallDown, HandleSmallDown);
-            await mql.AddMediaQueryListener(Breakpoints.LargeUp, HandleLarge);
-            initialState = await mql.GetState();
-
-            //IsMqlSmallMedia = initialState[Breakpoints.SmallDown];
-            //IsMqlMediumMedia = initialState[Breakpoints.OnlyMedium];
-            //IsMqlLargeMedia = initialState[Breakpoints.LargeUp];
+            mql.OnMediaQueryListChanged += MediaQueryChanged;
+            smallMedia = await mql.SubscribeMediaQuery(smallMedia);
+            largeMedia = await mql.SubscribeMediaQuery(largeMedia);
+            largeMedia.OnChange = OnLargeMediaQueryChanged;
             StateHasChanged();
         }
+    }
+
+    void MediaQueryChanged(object _, MediaQueryListItem item)
+    {
+        var a = new[] { smallMedia, largeMedia };
+        a.Update(item);
+        StateHasChanged();
+    }
+
+    void OnLargeMediaQueryChanged(MediaQueryListItem item)
+    {
+        Message = "Large got triggered";
     }
 
 }

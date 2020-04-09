@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize.MediaQuery
 {
-    public class MediaQueryList : IDisposable
+    public class MediaQueryListOld : IDisposable
     {
         const string ns = "blazorSizeMedia";
         private readonly IJSRuntime jsRuntime;
@@ -15,7 +15,7 @@ namespace BlazorPro.BlazorSize.MediaQuery
         private bool disposed;
         private readonly Dictionary<string, List<Action<MediaQueryListEventArgs>>> callbackLists;
 
-        public MediaQueryList(IJSRuntime jsRuntime)
+        public MediaQueryListOld(IJSRuntime jsRuntime)
         {
             this.jsRuntime = jsRuntime;
             callbackLists = new Dictionary<string, List<Action<MediaQueryListEventArgs>>>();
