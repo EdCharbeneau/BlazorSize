@@ -1,6 +1,6 @@
-﻿namespace BlazorPro.BlazorSize.MediaQuery
+﻿namespace BlazorPro.BlazorSize
 {
-    public class MediaQueryListEventArgs
+    public class MediaQueryEventArgs
     {
        public bool Matches { get; set; }
        public string Media { get; set; }

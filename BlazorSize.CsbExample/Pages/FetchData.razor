@@ -1,7 +1,8 @@
-﻿@inject HttpClient Http
-@inject MediaQueryListener mql
+﻿@implements IDisposable
+@inject MediaQueryListener Mql
+@inject HttpClient Http
 @using TestComponents
-@using BlazorPro.BlazorSize.MediaQuery
+@using BlazorPro.BlazorSize
 @page "/fetchdata"
 
 
@@ -24,8 +25,8 @@ else
 
 @code {
     WeatherForecast[] forecasts;
-    MediaQueryListItem smallMedia = new MediaQueryListItem(Breakpoints.SmallDown);
-    MediaQueryListItem largeMedia = new MediaQueryListItem(Breakpoints.LargeUp);
+    MediaQuery smallMedia = new MediaQuery(Breakpoints.SmallDown);
+    MediaQuery largeMedia = new MediaQuery(Breakpoints.LargeUp);
     string Message = "";
 
     protected override async Task OnInitializedAsync()
@@ -38,24 +39,29 @@ else
 
         if (firstRender)
         {
-            mql.OnMediaQueryListChanged += MediaQueryChanged;
-            smallMedia = await mql.SubscribeMediaQuery(smallMedia);
-            largeMedia = await mql.SubscribeMediaQuery(largeMedia);
+            Mql.OnMediaQueryListChanged += MediaQueryChanged;
+            smallMedia = await Mql.SubscribeMediaQuery(smallMedia);
+            largeMedia = await Mql.SubscribeMediaQuery(largeMedia);
             largeMedia.OnChange = OnLargeMediaQueryChanged;
             StateHasChanged();
         }
     }
 
-    void MediaQueryChanged(object _, MediaQueryListItem item)
+    void MediaQueryChanged(object _, MediaQueryEventArgs item)
     {
-        var a = new[] { smallMedia, largeMedia };
-        a.Update(item);
+        var subs = new[] { smallMedia, largeMedia };
+        subs.ApplyChanges(item);
         StateHasChanged();
     }
 
-    void OnLargeMediaQueryChanged(MediaQueryListItem item)
+    void OnLargeMediaQueryChanged(MediaQueryEventArgs item)
     {
         Message = "Large got triggered";
+    }
+
+    void IDisposable.Dispose()
+    {
+        Mql.OnMediaQueryListChanged -= MediaQueryChanged;
     }
 
 }

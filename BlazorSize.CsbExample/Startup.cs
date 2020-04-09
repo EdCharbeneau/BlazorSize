@@ -1,5 +1,4 @@
 using BlazorPro.BlazorSize;
-using BlazorPro.BlazorSize.MediaQuery;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +14,7 @@ namespace BlazorSize.CsbExample
                 options.EnableLogging = true;
                 options.SuppressInitEvent = false;
             });
-            services.AddScoped<MediaQueryListener>();
+            services.AddMediaQueryListener(options => options.EnableLogging = true);
         }
 
         public void Configure(IComponentsApplicationBuilder app)

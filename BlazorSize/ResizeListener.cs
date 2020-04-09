@@ -9,11 +9,11 @@ namespace BlazorPro.BlazorSize
     {
         const string ns = "blazorSize";
         private readonly IJSRuntime jsRuntime;
-        private readonly ResizeOptions options;
+        private readonly MediaQueryListenerOptions options;
         private bool disposed;
-        public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
+        public ResizeListener(IJSRuntime jsRuntime, IOptions<MediaQueryListenerOptions> options = null)
         {
-            this.options = options.Value ?? new ResizeOptions();
+            this.options = options.Value ?? new MediaQueryListenerOptions();
             this.jsRuntime = jsRuntime;
         }
 

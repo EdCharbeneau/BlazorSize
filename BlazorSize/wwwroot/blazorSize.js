@@ -67,10 +67,11 @@ window.blazorSizeMedia = (function () {
     let dotnet = {};
     let log = () => { };
     let blazorSizeMediaOptions = {
-        enableLogging: true
+        enableLogging: false
     };
 
     function callbackReference(args) {
+        log(`[BlazorSize] MediaQuery Changed - media: ${args.media} matches: ${args.matches}`);
         dotnet.invokeMethodAsync("RaiseOnMediaQueryListChanged", { media: args.media, matches: args.matches });
     };
 
@@ -79,25 +80,33 @@ window.blazorSizeMedia = (function () {
         log = blazorSizeMediaOptions.enableLogging ? console.log : () => { };
     }
 
+    function addMediaQueryWithCallback(mediaQuery) {
+        let newMql = window.matchMedia(mediaQuery);
+        if (!mqls.some(m => m.media === newMql.media)) {
+            newMql.addListener(callbackReference);
+            mqls.push(newMql);
+        }
+        log(`[BlazorSize] Listening for MediaQuery: ${newMql.media}`);
+        return { media: newMql.media, matches: newMql.matches };
+    }
+
+    function clearMqlCache() {
+        for (var i = 0; i < mqls.length; i++) {
+            mqls[i].removeListener(callbackReference)
+        }
+        mqls = [];
+    }
+
     return {
         init: function (dotnetReference, options) {
             configure(options);
             dotnet = dotnetReference;
         },
         addMediaQueryListener: function (mediaQuery) {
-            log(`[BlazorSize] Reporting resize events for ${mediaQuery}`);
-            let newMql = window.matchMedia(mediaQuery);
-            if (!mqls.some(m => m.media === newMql.media)) 
-            {
-                newMql.addListener(callbackReference);
-                mqls.push(window.matchMedia(mediaQuery));
-            }
-            return { media: newMql.media, matches: newMql.matches };
+            return addMediaQueryWithCallback(mediaQuery);
         },
         cancelListener: function () {
-            for (var i = 0; i < mqls.length; i++) {
-                mqls[i].removeListener(callbackReference)
-            }
+            clearMqlCache();
         }
     };
 }

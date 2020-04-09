@@ -19,14 +19,14 @@ namespace BlazorPro.BlazorSize
         }
 
         /// <summary>
-        /// Adds a BlazorSize.MediaQueryList as a Scoped instance.
+        /// Adds a BlazorSize.MediaQueryListener as a Scoped instance.
         /// </summary>
         /// <param name="configure">Defines settings for this instance.</param>
         /// <returns>Continues the IServiceCollection chain.</returns>
-        public static IServiceCollection AddMediaQueryList(this IServiceCollection services,
-            Action<ResizeOptions> configure)
+        public static IServiceCollection AddMediaQueryListener(this IServiceCollection services,
+            Action<MediaQueryListenerOptions> configure)
         {
-            services.AddScoped<ResizeListener>();
+            services.AddScoped<MediaQueryListener>();
             services.Configure(configure);
             return services;
         }
