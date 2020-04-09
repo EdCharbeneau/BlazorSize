@@ -1,7 +1,7 @@
 ﻿@inject HttpClient Http
-@inject ResizeListener listener
-@implements IDisposable
+@inject IJSRuntime js
 @using TestComponents
+@using BlazorPro.BlazorSize.MediaQuery
 @page "/fetchdata"
 
 
@@ -9,7 +9,7 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-@if (IsSmallMedia)
+@if (IsMqlSmallMedia)
 {
     <WeatherCards Data="forecasts"></WeatherCards>
 }
@@ -18,37 +18,56 @@ else
     <WeatherGrid Data="forecasts"></WeatherGrid>
 }
 
+<ul class="list-group">
+    <li class="list-group-item @(IsMqlSmallMedia ? "active": "")">Phone Size</li>
+    <li class="list-group-item @(IsMqlMediumMedia ? "active": "")">Tablet Size</li>
+    <li class="list-group-item @(IsMqlLargeMedia? "active": "")">Desktop Size</li>
+</ul>
+
+<ul>
+    @foreach (var item in initialState)
+    {
+    <li>
+        @item.Key
+        <span>:</span>
+        @Breakpoints.OnlyMedium <span>=</span> @(item.Key == Breakpoints.OnlyMedium)
+    </li>
+    }
+
+</ul>
 @code {
     WeatherForecast[] forecasts;
 
-    BrowserWindowSize browser = new BrowserWindowSize();
+    MediaQueryList mql;
 
-    bool IsSmallMedia = false;
+    bool IsMqlSmallMedia;
+    bool IsMqlMediumMedia;
+    bool IsMqlLargeMedia;
+
+
+    Dictionary<string, bool> initialState = new Dictionary<string, bool>();
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 
         if (firstRender)
         {
-            listener.OnResized += WindowResizedA;
+            mql = new MediaQueryList(js);
+            await mql.AddMediaQueryListener(Breakpoints.OnlyMedium, HandleMedium);
+            await mql.AddMediaQueryListener(Breakpoints.SmallDown, HandleSmallDown);
+            await mql.AddMediaQueryListener(Breakpoints.LargeUp, HandleLarge);
+            initialState = await mql.GetState();
+
+            //IsMqlSmallMedia = initialState[Breakpoints.SmallDown];
+            //IsMqlMediumMedia = initialState[Breakpoints.OnlyMedium];
+            //IsMqlLargeMedia = initialState[Breakpoints.LargeUp];
+            StateHasChanged();
         }
-    }
-
-    async void WindowResizedA(object _, BrowserWindowSize window)
-    {
-        browser = window;
-        IsSmallMedia = await listener.MatchMedia(Breakpoints.SmallDown);
-        StateHasChanged();
-    }
-
-    void IDisposable.Dispose()
-    {
-        listener.OnResized -= WindowResizedA;
     }
 
 }
