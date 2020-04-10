@@ -1,9 +1,8 @@
-﻿@inject HttpClient Http
-@inject ResizeListener listener
+﻿@inject IJSRuntime js
+@inject HttpClient Http
 @implements IDisposable
 @using TestComponents
 @page "/fetchdata"
-
 
 <h1>Weather forecast</h1>
 
@@ -19,9 +18,8 @@ else
 }
 
 @code {
+    MediaQueryList mq;
     WeatherForecast[] forecasts;
-
-    BrowserWindowSize browser = new BrowserWindowSize();
 
     bool IsSmallMedia = false;
 
@@ -30,25 +28,26 @@ else
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 
         if (firstRender)
         {
-            listener.OnResized += WindowResizedA;
+            mq = new MediaQueryList(js);
+            var small = await mq.Add(Breakpoints.SmallDown, SmallMediaChanged);
+            IsSmallMedia = small.Matches;
         }
     }
 
-    async void WindowResizedA(object _, BrowserWindowSize window)
+    void SmallMediaChanged(MediaQueryArgs args)
     {
-        browser = window;
-        IsSmallMedia = await listener.MatchMedia(Breakpoints.SmallDown);
+        IsSmallMedia = args.Matches;
         StateHasChanged();
     }
 
-    void IDisposable.Dispose()
+    public async void Dispose()
     {
-        listener.OnResized -= WindowResizedA;
+        await mq.DisposeAsync();
     }
 
 }

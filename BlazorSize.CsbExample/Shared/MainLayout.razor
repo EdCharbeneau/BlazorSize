@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@inject IJSRuntime js
+@inherits LayoutComponentBase
 
 <div class="sidebar">
     <NavMenu />
@@ -13,3 +14,20 @@
         @Body
     </div>
 </div>
+
+@code {
+    MediaQueryList mq;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            mq = new MediaQueryList(js);
+            var small = await mq.Add(Breakpoints.LargeUp, (_) => { });
+        }
+    }
+
+    public async void Dispose()
+    {
+        await mq.DisposeAsync();
+    }
+}

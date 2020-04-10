@@ -1,6 +1,6 @@
 ﻿window.blazorSize = (function () {
 
-    let dotnet = { };
+    let dotnet = {};
     let throttleResizeHandlerId = -1;
     let log = () => { };
     let resizeOptions = {
@@ -57,6 +57,47 @@
             };
         }
 
+    };
+}
+)();
+
+window.blazorSizeMedia = (function () {
+    let mqls = [];
+
+    function callbackReference(dotnet) {
+        return function (args) {
+            console.log(`[BlazorSize] MediaQuery Changed - media: ${args.media} matches: ${args.matches}`);
+            dotnet.invokeMethodAsync("MediaQueryChanged", { media: args.media, matches: args.matches });
+        }
+    };
+
+    function addMediaQueryWithCallback(mediaQuery, dotnet) {
+        let newMql = window.matchMedia(mediaQuery);
+        let callback = callbackReference(dotnet);
+        newMql.addListener(callback);
+        mqls.push(
+            {
+                ref: dotnet,
+                query: newMql,
+                callbackRef: callback
+            }
+        );
+        console.log(`[BlazorSize] Listening for MediaQuery: ${newMql.media}`);
+        return { media: newMql.media, matches: newMql.matches };
+    };
+
+    function removeAll(dotnet) {
+        mqls.filter(f => f.ref._id === dotnet._id)
+            .forEach(o => o.query.removeListener(o.callbackRef));
+    };
+
+    return {
+        addMediaQueryListener: function (mediaQuery, dotnet) {
+            return addMediaQueryWithCallback(mediaQuery, dotnet);
+        },
+        removeMediaQueryListeners: function (dotnet) {
+            removeAll(dotnet);
+        }
     };
 }
 )();

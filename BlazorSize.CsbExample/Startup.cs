@@ -11,7 +11,7 @@ namespace BlazorSize.CsbExample
             services.AddResizeListener(options =>
             {
                 options.ReportRate = 300;
-                options.EnableLogging = true;
+                options.EnableLogging = false;
                 options.SuppressInitEvent = false;
             });
         }
