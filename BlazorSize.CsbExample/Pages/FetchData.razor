@@ -1,5 +1,4 @@
-﻿@inject IJSRuntime js
-@inject HttpClient Http
+﻿@inject HttpClient Http
 @using TestComponents
 @page "/fetchdata"
 
@@ -7,6 +6,7 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
+<!-- A single media query with built in templates -->
 <MediaQuery Media="@Breakpoints.SmallDown">
     <Matched>
         <WeatherCards Data="forecasts"></WeatherCards>
@@ -15,13 +15,14 @@
         <WeatherGrid Data="forecasts"></WeatherGrid>
     </Unmatched>
 </MediaQuery>
+
+<!-- A single media query, responding to a bound value -->
 @if (IsMedium)
 {
     <span>Medium</span>
 }
 
-<MediaQuery Media="@Breakpoints.OnlyMedium"
-            @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
 
 @code {
     WeatherForecast[] forecasts;
