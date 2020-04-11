@@ -1,6 +1,5 @@
 ﻿@inject IJSRuntime js
 @inject HttpClient Http
-@implements IDisposable
 @using TestComponents
 @page "/fetchdata"
 
@@ -8,48 +7,31 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-@if (IsSmallMedia)
+<MediaQuery Media="@Breakpoints.SmallDown">
+    <Matched>
+        <WeatherCards Data="forecasts"></WeatherCards>
+    </Matched>
+    <Unmatched>
+        <WeatherGrid Data="forecasts"></WeatherGrid>
+    </Unmatched>
+</MediaQuery>
+@if (IsMedium)
 {
-    <WeatherCards Data="forecasts"></WeatherCards>
+    <span>Medium</span>
 }
-else
-{
-    <WeatherGrid Data="forecasts"></WeatherGrid>
-}
+
+<MediaQuery Media="@Breakpoints.OnlyMedium"
+            @bind-Matches="IsMedium" />
 
 @code {
-    MediaQueryList mq;
     WeatherForecast[] forecasts;
 
-    bool IsSmallMedia = false;
+    bool IsMedium = false;
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-
-        if (firstRender)
-        {
-            mq = new MediaQueryList(js);
-            var small = await mq.Add(Breakpoints.SmallDown, SmallMediaChanged);
-            IsSmallMedia = small.Matches;
-        }
-    }
-
-    void SmallMediaChanged(MediaQueryArgs args)
-    {
-        IsSmallMedia = args.Matches;
-        StateHasChanged();
-    }
-
-    public async void Dispose()
-    {
-        await mq.DisposeAsync();
-    }
-
 }
 
 
