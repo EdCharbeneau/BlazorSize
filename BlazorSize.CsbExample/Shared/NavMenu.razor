@@ -25,6 +25,8 @@
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    [CascadingParameter] public MediaQueryList Mql { get; set; }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;

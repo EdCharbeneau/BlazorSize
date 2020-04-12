@@ -15,6 +15,8 @@ namespace BlazorPro.BlazorSize
         [Parameter] public RenderFragment Matched { get; set; }
         [Parameter] public RenderFragment Unmatched { get; set; }
 
+        [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
+
         private MediaQueryArgs internalMedia = new MediaQueryArgs();
         private DotNetObjectReference<MediaQuery> DotNetInstance;
 
@@ -23,9 +25,20 @@ namespace BlazorPro.BlazorSize
             if (firstRender)
             {
                 DotNetInstance = DotNetObjectReference.Create(this);
-                var mq = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryListener", Media, DotNetInstance);
-                internalMedia = mq;
-                MediaQueryChanged(mq);
+
+                if (MediaQueryList != null)
+                {
+                    var q = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance, Media);
+                    internalMedia = q;
+                    MediaQueryList.AddQuery(this);
+                    MediaQueryChanged(q);
+                }
+                else
+                {
+                    var mq = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryListener", Media, DotNetInstance);
+                    internalMedia = mq;
+                    MediaQueryChanged(mq);
+                }
             }
             await base.OnAfterRenderAsync(firstRender);
         }
@@ -33,14 +46,13 @@ namespace BlazorPro.BlazorSize
         [JSInvokable(nameof(MediaQuery.MediaQueryChanged))]
         public void MediaQueryChanged(MediaQueryArgs args)
         {
+            Console.WriteLine($"MediaQueryList Invoke: {args.Media}");
+
             if (args.Media == internalMedia.Media)
             {
                 MatchesChanged.InvokeAsync(args.Matches);
                 internalMedia = args;
-                if (Matched != null || Unmatched != null)
-                {
-                    StateHasChanged();
-                }
+                StateHasChanged();
             }
         }
 

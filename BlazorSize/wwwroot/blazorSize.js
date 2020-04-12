@@ -63,6 +63,17 @@
 
 window.blazorSizeMedia = (function () {
     let mqls = [];
+    let mediaQueryLists = [];
+    //let example = [{
+    //    mediaQueryListId: 1,
+    //    dotnetCallback: () => { },
+    //    mediaQueries: [
+    //        {
+    //            query: {},
+    //            children: []
+    //        }
+    //    ]
+    //}]
 
     function callbackReference(dotnet) {
         return function (args) {
@@ -86,17 +97,56 @@ window.blazorSizeMedia = (function () {
         return { media: newMql.media, matches: newMql.matches };
     };
 
+    function addMediaQueryList(dotnet) {
+        let callback = callbackReference(dotnet);
+        let mql = {
+            mediaQueryListId: dotnet._id,
+            dotnetCallback: callback,
+            queries: []
+        }
+        mediaQueryLists.push(mql);
+    }
+
+    function addMediaQueryToList(list, dotnet, mediaQuery) {
+        let mq = matchMedia(mediaQuery);
+        let mediaQueryList = mediaQueryLists.find(mql => mql.mediaQueryListId === list._id);
+        let hasMediaQuery = mediaQueryList.queries.some(q => q.media === mq.media);
+        if (!hasMediaQuery) {
+            mq.addListener(mediaQueryList.dotnetCallback);
+            let children = [dotnet._id];
+            mediaQueryList.queries.push({ mediaQuery: mq, children: children });
+        } else {
+            mediaQueryList.queries.find(m => m.media === mq.media).children.push(dotnet._id);
+        }
+        console.log(mediaQueryList.queries);
+        return { media: mq.media, matches: mq.matches };
+    }
+
     function removeAll(dotnet) {
         mqls.filter(f => f.ref._id === dotnet._id)
             .forEach(o => o.query.removeListener(o.callbackRef));
     };
 
+    function removeAllGlobals(dotnet) {
+        let item = globalMqls.filter(f => f.ref._id === dotnet._id)[0];
+        item.queries.forEach(q => q.removeListener(item.callback));
+    }
+
     return {
         addMediaQueryListener: function (mediaQuery, dotnet) {
             return addMediaQueryWithCallback(mediaQuery, dotnet);
         },
+        addMediaQuery: function (list, dotnet, mediaQuery) {
+            return addMediaQueryToList(list, dotnet, mediaQuery);
+        },
+        addMediaQueryList: function (dotnet) {
+            addMediaQueryList(dotnet);
+        },
         removeMediaQueryListeners: function (dotnet) {
             removeAll(dotnet);
+        },
+        removeMediaQueryList: function (dotnet) {
+            removeAllGlobals(dotnet);
         }
     };
 }
