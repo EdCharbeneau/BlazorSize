@@ -41,11 +41,18 @@ namespace BlazorPro.BlazorSize
                 }
             }
         }
-        public async void Dispose()
+        public void Dispose()
         {
             if (DotNetInstance != null)
             {
-                await Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
+                if (mediaQueries.Any())
+                {
+                    foreach (var item in mediaQueries)
+                    {
+                        item.Dispose();
+                    }
+                }
+                Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
                 DotNetInstance = null;
             }
