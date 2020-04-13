@@ -6,28 +6,32 @@
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-<!-- A single media query with built in templates -->
-<MediaQuery Media="@Breakpoints.SmallDown">
-    <Matched>
-        <WeatherCards Data="forecasts"></WeatherCards>
-    </Matched>
-    <Unmatched>
-        <WeatherGrid Data="forecasts"></WeatherGrid>
-    </Unmatched>
-</MediaQuery>
+@if (IsSmall)
+{
+    <WeatherCards Data="forecasts"></WeatherCards>
+}
+else
+{
+    <WeatherGrid Data="forecasts"></WeatherGrid>
+}
 
-<!-- A single media query, responding to a bound value -->
 @if (IsMedium)
 {
     <span>Medium</span>
 }
 
 <MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
 
+<MediaQueryList>
+    <MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+    <MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
+</MediaQueryList>
 @code {
     WeatherForecast[] forecasts;
 
     bool IsMedium = false;
+    bool IsSmall = false;
 
     protected override async Task OnInitializedAsync()
     {

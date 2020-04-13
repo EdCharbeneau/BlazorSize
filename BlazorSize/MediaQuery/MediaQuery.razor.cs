@@ -17,7 +17,8 @@ namespace BlazorPro.BlazorSize
 
         [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
 
-        private MediaQueryArgs internalMedia = new MediaQueryArgs();
+        public MediaQueryArgs InternalMedia { get; private set; } = new MediaQueryArgs();
+
         private DotNetObjectReference<MediaQuery> DotNetInstance;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -25,34 +26,25 @@ namespace BlazorPro.BlazorSize
             if (firstRender)
             {
                 DotNetInstance = DotNetObjectReference.Create(this);
-
-                if (MediaQueryList != null)
-                {
-                    var q = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance, Media);
-                    internalMedia = q;
-                    MediaQueryList.AddQuery(this);
-                    MediaQueryChanged(q);
-                }
-                else
-                {
-                    var mq = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryListener", Media, DotNetInstance);
-                    internalMedia = mq;
-                    MediaQueryChanged(mq);
-                }
+                InternalMedia = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance, Media);
+                Console.WriteLine($"[internal] { InternalMedia.Media }");
+                MediaQueryList.AddQuery(this);
+                MediaQueryChanged(InternalMedia);
             }
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        [JSInvokable(nameof(MediaQuery.MediaQueryChanged))]
         public void MediaQueryChanged(MediaQueryArgs args)
         {
-            Console.WriteLine($"MediaQueryList Invoke: {args.Media}");
 
-            if (args.Media == internalMedia.Media)
+            if (args.Media == InternalMedia.Media)
             {
+                InternalMedia.Matches = args.Matches;
                 MatchesChanged.InvokeAsync(args.Matches);
-                internalMedia = args;
-                StateHasChanged();
+                if (Matched != null || Unmatched != null)
+                {
+                    StateHasChanged();
+                }
             }
         }
 
@@ -60,7 +52,7 @@ namespace BlazorPro.BlazorSize
         {
             if (DotNetInstance != null)
             {
-                await Js.InvokeVoidAsync($"{ns}.removeMediaQueryListeners", DotNetInstance);
+                await Js.InvokeVoidAsync($"{ns}.removeMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance);
                 DotNetInstance.Dispose();
                 DotNetInstance = null;
             }

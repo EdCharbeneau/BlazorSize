@@ -35,18 +35,17 @@ namespace BlazorPro.BlazorSize
         {
             foreach (var item in mediaQueries)
             {
-                if (item.Media == args.Media)
+                if (item.InternalMedia.Media == args.Media)
                 {
                     item.MediaQueryChanged(args);
                 }
             }
         }
-
         public async void Dispose()
         {
             if (DotNetInstance != null)
             {
-                await Js.InvokeVoidAsync($"{ns}.removeMediaQueryListeners", DotNetInstance);
+                await Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
                 DotNetInstance = null;
             }
