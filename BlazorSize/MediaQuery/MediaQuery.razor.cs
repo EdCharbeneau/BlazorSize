@@ -27,7 +27,6 @@ namespace BlazorPro.BlazorSize
             {
                 DotNetInstance = DotNetObjectReference.Create(this);
                 InternalMedia = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance, Media);
-                Console.WriteLine($"[internal] { InternalMedia.Media }");
                 MediaQueryList.AddQuery(this);
                 MediaQueryChanged(InternalMedia);
             }
@@ -36,15 +35,11 @@ namespace BlazorPro.BlazorSize
 
         public void MediaQueryChanged(MediaQueryArgs args)
         {
-
-            if (args.Media == InternalMedia.Media)
+            InternalMedia.Matches = args.Matches;
+            MatchesChanged.InvokeAsync(args.Matches);
+            if (Matched != null || Unmatched != null)
             {
-                InternalMedia.Matches = args.Matches;
-                MatchesChanged.InvokeAsync(args.Matches);
-                if (Matched != null || Unmatched != null)
-                {
-                    StateHasChanged();
-                }
+                StateHasChanged();
             }
         }
 

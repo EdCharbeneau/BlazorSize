@@ -45,12 +45,9 @@ namespace BlazorPro.BlazorSize
         {
             if (DotNetInstance != null)
             {
-                if (mediaQueries.Any())
+                foreach (var item in mediaQueries)
                 {
-                    foreach (var item in mediaQueries)
-                    {
-                        item.Dispose();
-                    }
+                    item.Dispose();
                 }
                 Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
