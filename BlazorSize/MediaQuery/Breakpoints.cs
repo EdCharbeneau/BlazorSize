@@ -37,23 +37,23 @@
 
         /// Small devices (landscape phones, 576px and up)
         /// @media(min-width: 576px) and(max-width: 767.98px) { ... }
-        public static string OnlySmall => Between(SmallUp, SmallDown);
+        public static string OnlySmall => Between(SmallDown, SmallUp);
 
         /// Medium devices (tablets, 768px and up)
         /// @media(min-width: 768px) and(max-width: 991.98px) { ... }
-        public static string OnlyMedium => Between(MediumUp, MediumDown);
+        public static string OnlyMedium => Between(MediumDown, MediumUp);
 
         /// Large devices (desktops, 992px and up)
         /// @media(min-width: 992px) and(max-width: 1199.98px) { ... }
-        public static string OnlyLarge => Between(LargeUp, LargeDown);
+        public static string OnlyLarge => Between(LargeDown, LargeUp);
 
         /// <summary>
         /// Combines two media queries with the `and` keyword.
         /// Values must include parenthesis.
-        /// Ex: (min-width: 992px) and (max-width: 1199.98px)
+        /// Ex: (max-width: 1199.98px) and (min-width: 992px)
         /// </summary>
-        /// <param name="min"></param>
         /// <param name="max"></param>
-        public static string Between(string min, string max) => $"{min} and {max}";
+        /// <param name="min"></param>
+        public static string Between(string max, string min) => $"{max} and {max}";
     }
 }
