@@ -17,6 +17,9 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await MediaQueryList.Initialize();
+        if (firstRender)
+        {
+            await MediaQueryList.Initialize();
+        }
     }
 }

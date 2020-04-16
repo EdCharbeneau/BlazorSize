@@ -20,13 +20,9 @@ else
     <span>Medium</span>
 }
 
-@*<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
-<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />*@
+<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
 
-<MediaQueryList>
-    <MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
-    <MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
-</MediaQueryList>
 @code {
     WeatherForecast[] forecasts;
 
@@ -36,6 +32,16 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    }
+
+    [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await MediaQueryList.Initialize();
+        }
     }
 }
 
