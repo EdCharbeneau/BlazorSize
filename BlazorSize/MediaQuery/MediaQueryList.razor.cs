@@ -13,11 +13,43 @@ namespace BlazorPro.BlazorSize
         [Inject] public IJSRuntime Js { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         public DotNetObjectReference<MediaQueryList> DotNetInstance { get; private set; }
-        private List<MediaQuery> mediaQueries = new List<MediaQuery>();
+        private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
 
-        public void AddQuery(MediaQuery mq)
+        public void AddQuery(MediaQuery newMediaQuery)
         {
-            mediaQueries.Add(mq);
+            bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == newMediaQuery.Media;
+            var cache = mediaQueries.Find(byMediaProperties);
+            if (cache == null)
+            {
+                cache = new MediaQueryCache
+                {
+                    MediaRequested = newMediaQuery.Media,
+                };
+                mediaQueries.Add(cache);
+            }
+            cache.MediaQueries.Add(newMediaQuery);
+        }
+
+        public void RemoveQuery(MediaQuery mediaQuery)
+        {
+            Console.WriteLine(mediaQuery.InternalMedia.Media);
+            foreach (var item in mediaQueries)
+            {
+                Console.WriteLine(item.Value.Media);
+            }
+
+            bool byMediaProperties(MediaQueryCache q) => q.Value.Media == mediaQuery.InternalMedia.Media;
+            var cache = mediaQueries.Find(byMediaProperties);
+            if (cache != null)
+            {
+
+                cache.MediaQueries.Remove(mediaQuery);
+                if (cache.MediaQueries.Count() == 0)
+                {
+                    Js.InvokeVoidAsync($"{ns}.removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
+                    mediaQueries.Remove(cache);
+                }
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -30,29 +62,41 @@ namespace BlazorPro.BlazorSize
             await base.OnAfterRenderAsync(firstRender);
         }
 
+        public async Task Initialize()
+        {
+            foreach (var cache in mediaQueries)
+            {
+                cache.Value = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
+                MediaQueryChanged(cache.Value);
+            }
+        }
+
         [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]
         public void MediaQueryChanged(MediaQueryArgs args)
         {
-            foreach (var item in mediaQueries)
+
+            bool byMediaProperties(MediaQueryCache q) => q.Value.Media == args.Media;
+            var cache = mediaQueries.Find(byMediaProperties);
+            foreach (var item in cache.MediaQueries)
             {
-                if (item.InternalMedia.Media == args.Media)
-                {
-                    item.MediaQueryChanged(args);
-                }
+                item.MediaQueryChanged(args);
             }
         }
         public void Dispose()
         {
             if (DotNetInstance != null)
             {
-                foreach (var item in mediaQueries)
-                {
-                    item.Dispose();
-                }
                 Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
                 DotNetInstance = null;
             }
+        }
+
+        internal class MediaQueryCache
+        {
+            public string MediaRequested { get; set; }
+            public MediaQueryArgs Value { get; set; }
+            public List<MediaQuery> MediaQueries { get; set; } = new List<MediaQuery>();
         }
     }
 }

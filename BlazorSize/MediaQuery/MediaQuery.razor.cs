@@ -19,24 +19,15 @@ namespace BlazorPro.BlazorSize
 
         public MediaQueryArgs InternalMedia { get; private set; } = new MediaQueryArgs();
 
-        private DotNetObjectReference<MediaQuery> DotNetInstance;
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnInitialized()
         {
-            if (firstRender)
-            {
-                DotNetInstance = DotNetObjectReference.Create(this);
-                InternalMedia = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", MediaQueryList.DotNetInstance, DotNetInstance, Media);
-                MediaQueryList.AddQuery(this);
-                MediaQueryChanged(InternalMedia);
-            }
-            await base.OnAfterRenderAsync(firstRender);
+            MediaQueryList.AddQuery(this);
         }
 
         public void MediaQueryChanged(MediaQueryArgs args)
         {
-            InternalMedia.Matches = args.Matches;
             MatchesChanged.InvokeAsync(args.Matches);
+            InternalMedia = args;
             if (Matched != null || Unmatched != null)
             {
                 StateHasChanged();
@@ -45,12 +36,7 @@ namespace BlazorPro.BlazorSize
 
         public void Dispose()
         {
-            if (DotNetInstance != null)
-            {
-                Js.InvokeVoidAsync($"{ns}.removeMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance);
-                DotNetInstance.Dispose();
-                DotNetInstance = null;
-            }
+            MediaQueryList.RemoveQuery(this);
         }
     }
 }

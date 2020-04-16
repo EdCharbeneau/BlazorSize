@@ -32,12 +32,11 @@ describe('Your testing module', () => {
         expect(x.mediaQueryLists).toHaveLength(1);
     });
     test('Can add MediaQuery', () => {
-        var _a;
         let x = new blazorSizeMedia_1.BlazorSizeMedia();
         let query = '(min-width: 240px) and (max-width: 767px)';
         x.addMediaQueryList(fakeDotNetList);
-        let result = x.addMediaQueryToList(fakeDotNetList, fakeDotNetQuery, query);
-        expect((_a = x.mediaQueryLists[0].mediaQueries.get(query)) === null || _a === void 0 ? void 0 : _a.dotnetIds[0]).toBe(9);
+        let result = x.addMediaQueryToList(fakeDotNetList, query);
+        expect(x.mediaQueryLists[0].mediaQueries.length).toBe(1);
         expect(result.media).toBe(query);
         expect(result.matches).toBe(true);
     });
@@ -45,15 +44,15 @@ describe('Your testing module', () => {
         let x = new blazorSizeMedia_1.BlazorSizeMedia();
         let query = '(min-width: 240px) and (max-width: 767px)';
         x.addMediaQueryList(fakeDotNetList);
-        let result = x.addMediaQueryToList(fakeDotNetList, fakeDotNetQuery, query);
-        x.removeMediaQuery(fakeDotNetList, fakeDotNetQuery);
+        let result = x.addMediaQueryToList(fakeDotNetList, query);
+        x.removeMediaQuery(fakeDotNetList, query);
         expect(matchMedia.getListeners(query).length).toBe(0);
     });
     test('Can remove MediaQueryList', () => {
         let x = new blazorSizeMedia_1.BlazorSizeMedia();
         let query = '(min-width: 240px) and (max-width: 767px)';
         x.addMediaQueryList(fakeDotNetList);
-        let result = x.addMediaQueryToList(fakeDotNetList, fakeDotNetQuery, query);
+        let result = x.addMediaQueryToList(fakeDotNetList, query);
         x.removeMediaQueryList(fakeDotNetList);
         expect(matchMedia.getListeners(query).length).toBe(0);
         expect(x.mediaQueryLists.length).toBe(0);

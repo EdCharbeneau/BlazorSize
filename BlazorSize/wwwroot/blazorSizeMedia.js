@@ -2,7 +2,7 @@ class MediaQueryListItem {
     constructor(id) {
         this.id = id;
         this.dotnetCallback = (args) => { };
-        this.mediaQueries = new Map();
+        this.mediaQueries = [];
     }
 }
 export class BlazorSizeMedia {
@@ -17,17 +17,13 @@ export class BlazorSizeMedia {
             return mediaQueryList;
         };
     }
-    addMediaQueryToList(dotnetMql, dotnet, mediaQuery) {
-        var _a;
+    addMediaQueryToList(dotnetMql, mediaQuery) {
         let mq = window.matchMedia(mediaQuery);
         let mediaQueryList = this.getMediaQueryListById(dotnetMql._id);
         console.log(`[BlazorSize] MediaQuery Read - media: ${mq.media} matches: ${mq.matches}`);
-        if (!mediaQueryList.mediaQueries.has(mediaQuery)) {
+        if (!mediaQueryList.mediaQueries.find(q => q.media == mq.media)) {
             mq.addListener(mediaQueryList.dotnetCallback);
-            mediaQueryList.mediaQueries.set(mq.media, { query: mq, dotnetIds: [dotnet._id] });
-        }
-        else {
-            (_a = mediaQueryList.mediaQueries.get(mediaQuery)) === null || _a === void 0 ? void 0 : _a.dotnetIds.push(dotnet._id);
+            mediaQueryList.mediaQueries.push(mq);
         }
         return { matches: mq.matches, media: mq.media };
     }
@@ -42,34 +38,18 @@ export class BlazorSizeMedia {
         list.dotnetCallback = this.callbackReference(dotnet);
         this.mediaQueryLists.push(list);
     }
-    removeMediaQuery(dotnetMql, dotnet) {
-        // Get the media query from the list
+    removeMediaQuery(dotnetMql, mediaQuery) {
         let list = this.getMediaQueryListById(dotnetMql._id);
         let queries = list.mediaQueries;
-        let keys = Array.from(queries.keys());
-        keys.forEach(key => {
-            let subs = queries.get(key);
-            if (subs !== undefined) {
-                // Remove children
-                subs.dotnetIds = subs.dotnetIds.filter(id => id !== dotnet._id);
-                if (subs.dotnetIds.length === 0) {
-                    // cancel callbacks
-                    subs.query.removeListener(list.dotnetCallback);
-                    // remove empty
-                    queries.delete(key);
-                }
-            }
-        });
+        let toRemove = queries.find(q => q.media == mediaQuery);
+        toRemove === null || toRemove === void 0 ? void 0 : toRemove.removeListener(list.dotnetCallback);
+        queries = queries.filter(q => q.media === (toRemove === null || toRemove === void 0 ? void 0 : toRemove.media));
     }
     removeMediaQueryList(dotnetMql) {
         // Get the media query from the list
         let list = this.getMediaQueryListById(dotnetMql._id);
-        let keys = Array.from(list.mediaQueries.keys());
         // Remove all event handlers
-        keys.forEach(k => {
-            var _a;
-            (_a = list.mediaQueries.get(k)) === null || _a === void 0 ? void 0 : _a.query.removeListener(list.dotnetCallback);
-        });
+        list.mediaQueries.forEach(q => q.removeListener(list.dotnetCallback));
         // Remove the item from the list
         this.mediaQueryLists = this.mediaQueryLists.filter(f => f.id !== dotnetMql._id);
     }
