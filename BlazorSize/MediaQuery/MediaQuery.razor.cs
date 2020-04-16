@@ -26,7 +26,7 @@ namespace BlazorPro.BlazorSize
             if (firstRender)
             {
                 DotNetInstance = DotNetObjectReference.Create(this);
-                InternalMedia = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQuery", MediaQueryList.DotNetInstance, DotNetInstance, Media);
+                InternalMedia = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", MediaQueryList.DotNetInstance, DotNetInstance, Media);
                 MediaQueryList.AddQuery(this);
                 MediaQueryChanged(InternalMedia);
             }

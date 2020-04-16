@@ -54,6 +54,6 @@
         /// </summary>
         /// <param name="max"></param>
         /// <param name="min"></param>
-        public static string Between(string max, string min) => $"{max} and {max}";
+        public static string Between(string max, string min) => $"{max} and {min}";
     }
 }
