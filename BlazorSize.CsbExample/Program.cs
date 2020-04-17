@@ -17,7 +17,7 @@ namespace BlazorSize.CsbExample
             builder.Services.AddResizeListener(options =>
             {
                 options.ReportRate = 300;
-                options.EnableLogging = false;
+                options.EnableLogging = true;
                 options.SuppressInitEvent = false;
             });
             await builder.Build().RunAsync();

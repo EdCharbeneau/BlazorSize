@@ -31,6 +31,7 @@
   <ItemGroup>
     <TypeScriptCompile Remove="scripts\blazorSize.test.ts" />
     <TypeScriptCompile Remove="scripts\blazorSize.ts" />
+    <TypeScriptCompile Remove="scripts\blazorSizeResize.ts" />
   </ItemGroup>
 
 
