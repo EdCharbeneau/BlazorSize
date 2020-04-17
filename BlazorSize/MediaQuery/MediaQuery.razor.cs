@@ -28,7 +28,6 @@ namespace BlazorPro.BlazorSize
         {
             if (firstRender)
             {
-                Console.WriteLine($"Calling Init { Media }");
                 await MediaQueryList.Initialize(this);
             }
         }

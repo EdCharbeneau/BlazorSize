@@ -32,12 +32,6 @@ namespace BlazorPro.BlazorSize
 
         public void RemoveQuery(MediaQuery mediaQuery)
         {
-            Console.WriteLine(mediaQuery.InternalMedia.Media);
-            foreach (var item in mediaQueries)
-            {
-                Console.WriteLine(item.Value.Media);
-            }
-
             bool byMediaProperties(MediaQueryCache q) => q.Value.Media == mediaQuery.InternalMedia.Media;
             var cache = mediaQueries.Find(byMediaProperties);
             if (cache != null)
@@ -64,18 +58,22 @@ namespace BlazorPro.BlazorSize
 
         public async Task Initialize(MediaQuery mediaQuery)
         {
-            Console.WriteLine($"Initialize Start {mediaQuery.Media}");
-
             bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == mediaQuery.Media;
             var cache = mediaQueries.Find(byMediaProperties);
             if (cache.Value == null)
             {
-                Console.WriteLine($"Calling JavaScript {mediaQuery.Media}");
-
-                cache.Value = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
+                if (!cache.Loading)
+                {
+                    cache.Loading = true;
+                    var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
+                    cache.Value = await task;
+                    cache.Loading = task.IsCompleted;
+                    foreach (var item in cache.MediaQueries)
+                    {
+                        item.MediaQueryChanged(cache.Value);
+                    }
+                }
             }
-            mediaQuery.MediaQueryChanged(cache.Value);
-            Console.WriteLine($"Initialize End {mediaQuery.Media}");
         }
 
         [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]
@@ -102,6 +100,7 @@ namespace BlazorPro.BlazorSize
         internal class MediaQueryCache
         {
             public string MediaRequested { get; set; }
+            public bool Loading { get; set; }
             public MediaQueryArgs Value { get; set; }
             public List<MediaQuery> MediaQueries { get; set; } = new List<MediaQuery>();
         }
