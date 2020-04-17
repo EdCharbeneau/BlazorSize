@@ -33,16 +33,6 @@ else
     {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
-
-    [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await MediaQueryList.Initialize();
-        }
-    }
 }
 
 

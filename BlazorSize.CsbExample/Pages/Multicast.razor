@@ -11,15 +11,3 @@
         <ScreenSizeReporter />
     </div>
 </div>
-
-@code {
-    [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await MediaQueryList.Initialize();
-        }
-    }
-}

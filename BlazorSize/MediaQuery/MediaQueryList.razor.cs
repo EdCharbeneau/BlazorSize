@@ -62,13 +62,20 @@ namespace BlazorPro.BlazorSize
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        public async Task Initialize()
+        public async Task Initialize(MediaQuery mediaQuery)
         {
-            foreach (var cache in mediaQueries)
+            Console.WriteLine($"Initialize Start {mediaQuery.Media}");
+
+            bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == mediaQuery.Media;
+            var cache = mediaQueries.Find(byMediaProperties);
+            if (cache.Value == null)
             {
+                Console.WriteLine($"Calling JavaScript {mediaQuery.Media}");
+
                 cache.Value = await Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
-                MediaQueryChanged(cache.Value);
             }
+            mediaQuery.MediaQueryChanged(cache.Value);
+            Console.WriteLine($"Initialize End {mediaQuery.Media}");
         }
 
         [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]

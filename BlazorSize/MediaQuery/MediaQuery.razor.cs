@@ -24,6 +24,15 @@ namespace BlazorPro.BlazorSize
             MediaQueryList.AddQuery(this);
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                Console.WriteLine($"Calling Init { Media }");
+                await MediaQueryList.Initialize(this);
+            }
+        }
+
         public void MediaQueryChanged(MediaQueryArgs args)
         {
             MatchesChanged.InvokeAsync(args.Matches);
