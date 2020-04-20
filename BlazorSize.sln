@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPro.BlazorSize", "Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSize.Example", "BlazorSize.Example\BlazorSize.Example.csproj", "{127A1909-9EC9-483B-9C5F-E821E47B2C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSize.CsbExample", "BlazorSize.CsbExample\BlazorSize.CsbExample.csproj", "{E9AF60B8-6211-46CD-8262-B3106C3B48C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSize.CsbExample", "BlazorSize.CsbExample\BlazorSize.CsbExample.csproj", "{E9AF60B8-6211-46CD-8262-B3106C3B48C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestComponents", "TestComponents\TestComponents.csproj", "{E717846B-D7B7-4C0E-AFEE-6E194086EE78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestComponents", "TestComponents\TestComponents.csproj", "{E717846B-D7B7-4C0E-AFEE-6E194086EE78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

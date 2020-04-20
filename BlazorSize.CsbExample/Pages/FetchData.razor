@@ -1,56 +1,38 @@
 ﻿@inject HttpClient Http
-@inject ResizeListener listener
-@implements IDisposable
 @using TestComponents
 @page "/fetchdata"
-
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-@if (IsSmallMedia)
-{
-    <WeatherGrid Data="forecasts"></WeatherGrid>
-}
-else
+@if (IsSmall)
 {
     <WeatherCards Data="forecasts"></WeatherCards>
 }
+else
+{
+    <WeatherGrid Data="forecasts"></WeatherGrid>
+}
+
+@if (IsMedium)
+{
+    <span>Medium</span>
+}
+
+<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
 
 @code {
     WeatherForecast[] forecasts;
 
-    BrowserWindowSize browser = new BrowserWindowSize();
-
-    bool IsSmallMedia = false;
+    bool IsMedium = false;
+    bool IsSmall = false;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-
-        if (firstRender)
-        {
-            listener.OnResized += WindowResizedA;
-        }
-    }
-
-    async void WindowResizedA(object _, BrowserWindowSize window)
-    {
-        browser = window;
-        IsSmallMedia = await listener.MatchMedia("(min-width: 768px)");
-        StateHasChanged();
-    }
-
-    void IDisposable.Dispose()
-    {
-        listener.OnResized -= WindowResizedA;
-    }
-
 }
 
 

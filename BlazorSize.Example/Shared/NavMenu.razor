@@ -1,5 +1,5 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">BlazorSize.Example</a>
+    <a class="navbar-brand" href="">BlazorSize.CsbExample</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,19 +13,41 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="/fetchdata">
-                <span class="oi oi-resize-width" aria-hidden="true"></span> Home
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="size">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Detect Size
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="multicast">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Multiple Queries
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="templates">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Templates
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="blank">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Test Dispose
             </NavLink>
         </li>
     </ul>
 </div>
 
 @code {
-    bool collapseNavMenu = true;
+    private bool collapseNavMenu = true;
 
-    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    void ToggleNavMenu()
+    [CascadingParameter] public MediaQueryList Mql { get; set; }
+
+    private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
