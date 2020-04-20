@@ -53,6 +53,7 @@ describe('Your testing module', () => {
         let result = x.addMediaQueryToList(fakeDotNetList, query);
         x.removeMediaQuery(fakeDotNetList, query);
         expect(matchMedia.getListeners(query).length).toBe(0);
+        expect(x.mediaQueryLists[0].mediaQueries.length).toBe(0);
     })
 
     test('Can remove MediaQueryList', () => {

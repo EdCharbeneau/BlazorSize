@@ -9,28 +9,28 @@ class ResizeOptions {
 }
 class ResizeListener {
     constructor() {
-        this.throttleResizeHandlerId = -1;
         this.logger = (message) => { };
         this.options = new ResizeOptions();
-    }
-    throttleResizeHandler() {
-        clearTimeout(this.throttleResizeHandlerId);
-        this.throttleResizeHandlerId = setTimeout(this.resizeHandler, this.options.reportRate);
-    }
-    resizeHandler() {
-        this.dotnet.invokeMethodAsync('RaiseOnResized', {
-            height: window.innerHeight,
-            width: window.innerWidth
-        });
-        this.logger("[BlazorSize] RaiseOnResized invoked");
+        this.throttleResizeHandlerId = -1;
+        this.throttleResizeHandler = () => {
+            clearTimeout(this.throttleResizeHandlerId);
+            this.throttleResizeHandlerId = setTimeout(this.resizeHandler, this.options.reportRate);
+        };
+        this.resizeHandler = () => {
+            this.dotnet.invokeMethodAsync('RaiseOnResized', {
+                height: window.innerHeight,
+                width: window.innerWidth
+            });
+            this.logger("[BlazorSize] RaiseOnResized invoked");
+        };
     }
     listenForResize(dotnetRef, options) {
+        this.options = options;
         this.dotnet = dotnetRef;
         this.logger = options.enableLogging ? console.log : (message) => { };
-        this.options = options;
         this.logger(`[BlazorSize] Reporting resize events at rate of: ${this.options.reportRate}ms`);
         window.addEventListener("resize", this.throttleResizeHandler);
-        if (this.options.suppressInitEvent) {
+        if (!this.options.suppressInitEvent) {
             this.resizeHandler();
         }
     }
