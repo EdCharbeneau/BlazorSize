@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./wwwroot",
+    //"noImplicitAny": false,
+    //"noEmitOnError": true,
+    //"removeComments": true,
+    //"sourceMap": false,
+    "target": "ES6",
+    "moduleResolution": "node",
+    "lib": [ "ES2016", "DOM"]
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "**/*.test.ts"
+  ]
+}
