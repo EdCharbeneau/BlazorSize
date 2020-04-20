@@ -21,7 +21,14 @@ namespace BlazorPro.BlazorSize
 
         protected override void OnInitialized()
         {
-            MediaQueryList.AddQuery(this);
+            if (MediaQueryList == null)
+            {
+                throw new Exception("MediaQueryList is null. The MediaQueryList component should be added to the root or MainLayout of your applicaiton.");
+            }
+            else
+            {
+                MediaQueryList.AddQuery(this);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

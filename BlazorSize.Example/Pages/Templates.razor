@@ -1,4 +1,5 @@
-﻿@inject HttpClient Http
+﻿@inject WeatherForecastService Forecasts
+
 @using TestComponents
 @page "/templates"
 
@@ -21,6 +22,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        forecasts = await Forecasts.GetForecastAsync(DateTime.Now);
     }
 }

@@ -1,37 +1,38 @@
-﻿@page "/fetchdata"
+﻿@inject WeatherForecastService Forecasts
 @using TestComponents
-
-@using BlazorSize.Example.Data
-@inject WeatherForecastService ForecastService
+@page "/fetchdata"
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates adaptive rendering of a Blazor UI.</p>
 
-<MediaQuery Media="@Breakpoints.SmallDown">
-    <Matched>
-        <WeatherCards Data="forecasts"></WeatherCards>
-    </Matched>
-    <Unmatched>
-        <WeatherGrid Data="forecasts"></WeatherGrid>
-    </Unmatched>
-</MediaQuery>
+@if (IsSmall)
+{
+    <WeatherCards Data="forecasts"></WeatherCards>
+}
+else
+{
+    <WeatherGrid Data="forecasts"></WeatherGrid>
+}
+
 @if (IsMedium)
 {
     <span>Medium</span>
 }
 
-<MediaQuery Media="@Breakpoints.OnlyMedium"
-            @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
 
 @code {
     WeatherForecast[] forecasts;
 
     bool IsMedium = false;
+    bool IsSmall = false;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        forecasts = await Forecasts.GetForecastAsync(DateTime.Now);
     }
-
 }
+
+

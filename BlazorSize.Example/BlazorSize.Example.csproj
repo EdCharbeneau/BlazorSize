@@ -9,4 +9,49 @@
     <ProjectReference Include="..\TestComponents\TestComponents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Blank.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\FetchData.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\Index.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\NavMenu.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Templates.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Templates.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Multicast.razor" />
+    <_ContentIncludedByDefault Remove="Pages\ScreenSize.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Templates.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\ScreenSize.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\ScreenSize.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\Multicast.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Multicast.razor" />
+  </ItemGroup>
+
 </Project>
