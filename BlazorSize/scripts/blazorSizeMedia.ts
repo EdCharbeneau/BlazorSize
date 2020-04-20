@@ -29,7 +29,7 @@ export class BlazorSizeMedia {
     addMediaQueryToList(dotnetMql: any, mediaQuery: string) {
         let mq = window.matchMedia(mediaQuery);
         let mediaQueryList = this.getMediaQueryListById(dotnetMql._id);
-        console.log(`[BlazorSize] MediaQuery Read - media: ${mq.media} matches: ${mq.matches}`);
+        //console.log(`[BlazorSize] MediaQuery Read - media: ${mq.media} matches: ${mq.matches}`);
         mq.addListener(mediaQueryList.dotnetCallback);
         mediaQueryList.mediaQueries.push(mq);
         return { matches: mq.matches, media: mq.media } as MediaQueryArgs;
@@ -37,7 +37,7 @@ export class BlazorSizeMedia {
 
     callbackReference(dotnet: any) {
         return (ev: MediaQueryListEvent) => {
-            console.log(`[BlazorSize] MediaQuery Changed - media: ${ev.media} matches: ${ev.matches}`);
+            //console.log(`[BlazorSize] MediaQuery Changed - media: ${ev.media} matches: ${ev.matches}`);
             dotnet.invokeMethodAsync("MediaQueryChanged", { matches: ev.matches, media: ev.media } as MediaQueryArgs);
         }
     }
