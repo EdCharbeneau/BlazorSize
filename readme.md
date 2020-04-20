@@ -15,7 +15,7 @@ dotnet add package BlazorPro.BlazorSize
 ```
 **.csproj**
 ```html
-<PackageReference Include="BlazorPro.BlazorSize" Version="1.*" />
+<PackageReference Include="BlazorPro.BlazorSize" Version="2.*" />
 ```
 
 ## Reference the JavaScript interop
