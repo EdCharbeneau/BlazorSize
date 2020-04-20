@@ -5,7 +5,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.2.2</Version>
+    <Version>2.0.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -15,12 +15,14 @@
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
-    <PackageReleaseNotes>1.2.2
+    <PackageReleaseNotes>2.0.0
+       Added MediaQueryList &amp; MediaQuery components.
+1.2.2
        Fixes initalization issues with Client-Side Blazor
 1.2.0
        Full-release</PackageReleaseNotes>
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <FileVersion>1.2.2.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <PackageId>BlazorPro.BlazorSize</PackageId>
   </PropertyGroup>
 
