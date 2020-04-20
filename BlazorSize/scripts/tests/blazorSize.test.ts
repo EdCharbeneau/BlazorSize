@@ -1,4 +1,4 @@
-﻿import { BlazorSizeMedia } from './blazorSizeMedia';
+﻿import { BlazorSizeMedia } from '../blazorSizeMedia';
 import MatchMediaMock from 'jest-matchmedia-mock';
 import MatchMedia from 'jest-matchmedia-mock';
 
