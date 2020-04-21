@@ -9,16 +9,24 @@ namespace BlazorPro.BlazorSize
 {
     public partial class MediaQueryList : IDisposable
     {
+        // JavaScript namespace
         const string ns = "blazorSizeMedia";
         [Inject] public IJSRuntime Js { get; set; }
+
+        /// <summary>
+        /// Application content where Media Query components may exist.
+        /// </summary>
         [Parameter] public RenderFragment ChildContent { get; set; }
-        public DotNetObjectReference<MediaQueryList> DotNetInstance { get; private set; }
+
+        // JavaScript uses this value for tracking MediaQueryList instances.
+        private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; }
         private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
+
+        private MediaQueryCache GetMediaQueryFromCache(string byMedia) => mediaQueries.Find(q => q.MediaRequested == byMedia);
 
         public void AddQuery(MediaQuery newMediaQuery)
         {
-            bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == newMediaQuery.Media;
-            var cache = mediaQueries.Find(byMediaProperties);
+            var cache = GetMediaQueryFromCache(byMedia: newMediaQuery.Media);
             if (cache == null)
             {
                 cache = new MediaQueryCache
@@ -32,8 +40,7 @@ namespace BlazorPro.BlazorSize
 
         public void RemoveQuery(MediaQuery mediaQuery)
         {
-            bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == mediaQuery.Media;
-            var cache = mediaQueries.Find(byMediaProperties);
+            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
             if (cache != null)
             {
 
@@ -58,16 +65,18 @@ namespace BlazorPro.BlazorSize
 
         public async Task Initialize(MediaQuery mediaQuery)
         {
-            bool byMediaProperties(MediaQueryCache q) => q.MediaRequested == mediaQuery.Media;
-            var cache = mediaQueries.Find(byMediaProperties);
+            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
             if (cache.Value == null)
             {
+                // If we don't flag the cache as loading, duplicate requests will be sent async.
+                // Duplicate requests = poor performance, esp with web sockets.
                 if (!cache.Loading)
                 {
                     cache.Loading = true;
                     var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
+                    // When loading is complete dispatch an update to all subscribers.
                     foreach (var item in cache.MediaQueries)
                     {
                         item.MediaQueryChanged(cache.Value);
@@ -76,12 +85,18 @@ namespace BlazorPro.BlazorSize
             }
         }
 
+        /// <summary>
+        /// Called by JavaScript when a media query changes in the dom.
+        /// </summary>
+        /// <param name="args"></param>
         [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]
         public void MediaQueryChanged(MediaQueryArgs args)
         {
+            // cache must be compared by actual value, not RequestedMedia when invoked from JavaScript
+            // DOM Media value my be different that the initally requested media query value.
+            var cache = mediaQueries.Find(q => q.Value.Media == args.Media);
 
-            bool byMediaProperties(MediaQueryCache q) => q.Value.Media == args.Media;
-            var cache = mediaQueries.Find(byMediaProperties);
+            // Dispatch events to all subscribers
             foreach (var item in cache.MediaQueries)
             {
                 item.MediaQueryChanged(args);
@@ -99,9 +114,24 @@ namespace BlazorPro.BlazorSize
 
         internal class MediaQueryCache
         {
+            /// <summary>
+            /// Initally requested (unmodified) media query.
+            /// </summary>
             public string MediaRequested { get; set; }
+
+            /// <summary>
+            /// Is this item already awating a JavaScript interop call.
+            /// </summary>
             public bool Loading { get; set; }
+
+            /// <summary>
+            /// The actual value represented by the DOM. This may differ from the initially requested media query.
+            /// </summary>
             public MediaQueryArgs Value { get; set; }
+
+            /// <summary>
+            /// Media Queries that share a RequestedMedia value. Used to aggregate event handlers and minimize JS calls.
+            /// </summary>
             public List<MediaQuery> MediaQueries { get; set; } = new List<MediaQuery>();
         }
     }

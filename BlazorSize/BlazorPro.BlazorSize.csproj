@@ -62,6 +62,14 @@
     <Content Include="scripts\tests\*.js">
       <Pack>False</Pack>
     </Content>
+    <Content Remove="scripts\tests\blazorSize.js" />
+    <Content Remove="scripts\tests\blazorSize.test.js" />
+    <Content Remove="scripts\tests\blazorSizeMedia.js" />
+    <Content Remove="scripts\tests\blazorSizeResize.js" />
+    <None Remove="scripts\tests\blazorSize.js" />
+    <None Remove="scripts\tests\blazorSize.test.js" />
+    <None Remove="scripts\tests\blazorSizeMedia.js" />
+    <None Remove="scripts\tests\blazorSizeResize.js" />
     <Content Update="package*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
