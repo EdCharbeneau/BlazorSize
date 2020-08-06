@@ -74,6 +74,13 @@ namespace BlazorPro.BlazorSize
                     }
                 }
             }
+            else
+            {
+                var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                cache.Value = await task;
+
+                mediaQuery.MediaQueryChanged(cache.Value);
+            }
         }
 
         [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]
