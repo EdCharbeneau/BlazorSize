@@ -32,7 +32,7 @@ namespace BlazorPro.BlazorSize
 
         public void RemoveQuery(MediaQuery mediaQuery)
         {
-            bool byMediaProperties(MediaQueryCache q) => q.Value.Media == mediaQuery.InternalMedia.Media;
+            bool byMediaProperties(MediaQueryCache q) => q.Value?.Media == mediaQuery.InternalMedia.Media;
             var cache = mediaQueries.Find(byMediaProperties);
             if (cache != null)
             {
