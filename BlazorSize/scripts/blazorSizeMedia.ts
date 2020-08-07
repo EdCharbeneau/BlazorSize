@@ -26,6 +26,11 @@ export class BlazorSizeMedia {
         return mediaQueryList;
     };
 
+    getMediaQueryArgs(mediaQuery: string) {
+        let mq = window.matchMedia(mediaQuery);
+        return { matches: mq.matches, media: mq.media } as MediaQueryArgs;
+    }
+
     addMediaQueryToList(dotnetMql: any, mediaQuery: string) {
         let mq = window.matchMedia(mediaQuery);
         let mediaQueryList = this.getMediaQueryListById(dotnetMql._id);

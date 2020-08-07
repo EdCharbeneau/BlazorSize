@@ -32,7 +32,7 @@ namespace BlazorPro.BlazorSize
 
         public void RemoveQuery(MediaQuery mediaQuery)
         {
-            bool byMediaProperties(MediaQueryCache q) => q.Value.Media == mediaQuery.InternalMedia.Media;
+            bool byMediaProperties(MediaQueryCache q) => q.Value?.Media == mediaQuery.InternalMedia.Media;
             var cache = mediaQueries.Find(byMediaProperties);
             if (cache != null)
             {
@@ -73,6 +73,13 @@ namespace BlazorPro.BlazorSize
                         item.MediaQueryChanged(cache.Value);
                     }
                 }
+            }
+            else
+            {
+                var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                cache.Value = await task;
+
+                mediaQuery.MediaQueryChanged(cache.Value);
             }
         }
 
