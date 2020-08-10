@@ -5,7 +5,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>2.0.2</Version>
+    <Version>2.2.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -16,6 +16,11 @@
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+      2.2.0
+      Fixed possible regressions, update recommended.
+      Updated Blazor dependencies.
+      2.1.1
+      Fixed MSBuild including *.json files breaking NuGet pkg.
       2.0.0
       Added MediaQueryList &amp; MediaQuery components.
       1.2.2
@@ -23,21 +28,15 @@
       1.2.0
       Full-release
     </PackageReleaseNotes>
-    <AssemblyVersion>2.0.2.0</AssemblyVersion>
-    <FileVersion>2.0.2.0</FileVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.2.0</FileVersion>
     <PackageId>BlazorPro.BlazorSize</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="scripts\blazorSize.test.ts" />
-    <TypeScriptCompile Remove="scripts\blazorSize.ts" />
-    <TypeScriptCompile Remove="scripts\blazorSizeResize.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.8.3">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

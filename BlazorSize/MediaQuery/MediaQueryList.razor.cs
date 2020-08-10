@@ -22,7 +22,7 @@ namespace BlazorPro.BlazorSize
         private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; }
         private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
 
-        private MediaQueryCache GetMediaQueryFromCache(string byMedia) => mediaQueries.Find(q => q.MediaRequested == byMedia);
+        private MediaQueryCache GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
 
         public void AddQuery(MediaQuery newMediaQuery)
         {
@@ -81,6 +81,13 @@ namespace BlazorPro.BlazorSize
                     {
                         item.MediaQueryChanged(cache.Value);
                     }
+                }
+                else
+                {
+                    var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                    cache.Value = await task;
+
+                    mediaQuery.MediaQueryChanged(cache.Value);
                 }
             }
         }
