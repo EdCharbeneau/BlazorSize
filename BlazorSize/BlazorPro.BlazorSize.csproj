@@ -36,10 +36,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.7">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <!-- NuGet info -->
@@ -55,25 +51,11 @@
       <PackagePath></PackagePath>
     </None>
     <!-- Exclude -->
+    <!-- /scripts/test/*.js is removed via rimraf in the testing phase -->
     <Content Include="*.ts">
       <Pack>False</Pack>
     </Content>
-    <Content Include="scripts\tests\*.js">
-      <Pack>False</Pack>
-    </Content>
-    <Content Remove="scripts\tests\blazorSize.js" />
-    <Content Remove="scripts\tests\blazorSize.test.js" />
-    <Content Remove="scripts\tests\blazorSizeMedia.js" />
-    <Content Remove="scripts\tests\blazorSizeResize.js" />
-    <None Remove="scripts\tests\blazorSize.js" />
-    <None Remove="scripts\tests\blazorSize.test.js" />
-    <None Remove="scripts\tests\blazorSizeMedia.js" />
-    <None Remove="scripts\tests\blazorSizeResize.js" />
-    <Content Update="package*.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <Pack>False</Pack>
-    </Content>
-    <Content Update="tsconfig*.json">
+    <Content Update="*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
     </Content>

@@ -4,9 +4,10 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "tsc -p tsconfig.json && jest",
-    "build": "tsc -p tsconfig.build.json && npm run bundle",
-    "bundle": "rollup -c rollup.config.js"
+    "test": "tsc -p tsconfig.json && jest && npm run posttest",
+    "posttest": "rimraf scripts/tests/*.js",
+    "bundle": "rollup -c rollup.config.js",
+    "build": "tsc -p tsconfig.build.json && npm run bundle"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +18,8 @@
     "rollup": "^2.23.1",
     "rollup-plugin-terser": "^5.3.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "rimraf": "3.0.2"
   },
   "dependencies": {}
 }
