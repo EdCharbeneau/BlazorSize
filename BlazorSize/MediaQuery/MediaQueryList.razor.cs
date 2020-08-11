@@ -82,13 +82,13 @@ namespace BlazorPro.BlazorSize
                         item.MediaQueryChanged(cache.Value);
                     }
                 }
-                else
-                {
-                    var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
-                    cache.Value = await task;
+            }
+            else
+            {
+                var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                cache.Value = await task;
 
-                    mediaQuery.MediaQueryChanged(cache.Value);
-                }
+                mediaQuery.MediaQueryChanged(cache.Value);
             }
         }
 
