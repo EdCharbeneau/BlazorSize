@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
@@ -7,16 +6,44 @@ namespace BlazorPro.BlazorSize
 {
     public partial class MediaQuery : IDisposable
     {
-        const string ns = "blazorSizeMedia";
-        [Inject] public IJSRuntime Js { get; set; }
+        /// <summary>
+        /// Media Query string, using standard media query syntax.
+        /// Ex: "(max-width: 767.98px)"
+        /// </summary>
         [Parameter] public string Media { get; set; }
+
+        /// <summary>
+        /// The result of the specified Media property.
+        /// Use the @bind-Media directive for automated binding.
+        /// </summary>
         [Parameter] public bool Matches { get; set; }
+
+        /// <summary>
+        /// Handles the changed event when the media query's Matches property is changed.
+        /// Use the @bind-Media directive for automated binding.
+        /// </summary>
         [Parameter] public EventCallback<bool> MatchesChanged { get; set; }
+
+        /// <summary>
+        /// Optional template, shown only when the Matches value is true.
+        /// Using a template will disable @bind-Matches for performance.
+        /// </summary>
         [Parameter] public RenderFragment Matched { get; set; }
+
+        /// <summary>
+        /// Optional template, shown only when the Matches value is false.
+        /// Using a template will disable @bind-Matches for performance.
+        /// </summary>
         [Parameter] public RenderFragment Unmatched { get; set; }
 
+        /// <summary>
+        /// Gets the parent MediaQueryList container.
+        /// </summary>
         [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
 
+        /// <summary>
+        /// Set by the DOM, the InternalMedia represents the actual Media Query value held by the DOM.
+        /// </summary>
         public MediaQueryArgs InternalMedia { get; private set; } = new MediaQueryArgs();
 
         protected override void OnInitialized()
@@ -39,6 +66,10 @@ namespace BlazorPro.BlazorSize
             }
         }
 
+        /// <summary>
+        /// Used by the MediaQueryList. Invokes the full media query changed event.
+        /// </summary>
+        /// <param name="args">MediaQueryArgs</param>
         public void MediaQueryChanged(MediaQueryArgs args)
         {
             MatchesChanged.InvokeAsync(args.Matches);

@@ -24,7 +24,7 @@ export class ResizeListener {
 
     public throttleResizeHandler = () => {
         clearTimeout(this.throttleResizeHandlerId);
-        this.throttleResizeHandlerId = setTimeout(this.resizeHandler, this.options.reportRate);
+        this.throttleResizeHandlerId = window.setTimeout(this.resizeHandler, this.options.reportRate);
     }
 
     public resizeHandler = () => {
