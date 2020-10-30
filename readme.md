@@ -120,17 +120,14 @@ IsSmallUpMedia = await listener.MatchMedia(Breakpoints.SmallUp);
 
 /// @media(min-width: 768px) { ... }
 /// Medium devices (tablets, 768px and up)
-Breakpoints.MediumUp
 IsMediumUpMedia = await listener.MatchMedia(Breakpoints.MediumUp);
 
 // Large devices (desktops, 992px and up)
 /// @media(min-width: 992px) { ... }
-Breakpoints.LargeUp
 IsLargeUpMedia = await listener.MatchMedia(Breakpoints.LargeUp);
 
 /// Extra large devices (large desktops, 1200px and up)
 /// @media(min-width: 1200px) { ... }
-Breakpoints.XLargeUp
 IsXLargeUpMedia = await listener.MatchMedia(Breakpoints.XLargeUp);
 
 /// Extra small devices (portrait phones, less than 576px)
