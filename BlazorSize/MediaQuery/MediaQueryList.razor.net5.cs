@@ -1,19 +1,18 @@
-﻿#if !NET5_0
-
+﻿#if NET5_0
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace BlazorPro.BlazorSize
 {
-
     public partial class MediaQueryList : IDisposable
     {
+        private IJSObjectReference mediaQueryJs;
 
         // JavaScript namespace
-        const string ns = "blazorSizeMedia";
         [Inject] public IJSRuntime Js { get; set; }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace BlazorPro.BlazorSize
                 cache.MediaQueries.Remove(mediaQuery);
                 if (cache.MediaQueries.Count() == 0)
                 {
-                    Js.InvokeVoidAsync($"{ns}.removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
+                    mediaQueryJs.InvokeVoidAsync("removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
                     mediaQueries.Remove(cache);
                 }
             }
@@ -60,8 +59,13 @@ namespace BlazorPro.BlazorSize
         {
             if (firstRender)
             {
+                mediaQueryJs = await Js.InvokeAsync<IJSObjectReference>(
+                    "import",
+                    "./_content/BlazorPro.BlazorSize/blazorSizeMediaModule.js"
+                    );
+
                 DotNetInstance = DotNetObjectReference.Create(this);
-                await Js.InvokeVoidAsync($"{ns}.addMediaQueryList", DotNetInstance);
+                await mediaQueryJs.InvokeVoidAsync("addMediaQueryList", DotNetInstance);
             }
             await base.OnAfterRenderAsync(firstRender);
         }
@@ -76,7 +80,7 @@ namespace BlazorPro.BlazorSize
                 if (!cache.Loading)
                 {
                     cache.Loading = true;
-                    var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
+                    var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>("addMediaQueryToList", DotNetInstance, cache.MediaRequested);
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
                     // When loading is complete dispatch an update to all subscribers.
@@ -88,7 +92,7 @@ namespace BlazorPro.BlazorSize
             }
             else
             {
-                var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>("getMediaQueryArgs", cache.MediaRequested);
                 cache.Value = await task;
 
                 mediaQuery.MediaQueryChanged(cache.Value);
@@ -99,7 +103,7 @@ namespace BlazorPro.BlazorSize
         /// Called by JavaScript when a media query changes in the dom.
         /// </summary>
         /// <param name="args"></param>
-        [JSInvokable(nameof(MediaQueryList.MediaQueryChanged))]
+        [JSInvokable]
         public void MediaQueryChanged(MediaQueryArgs args)
         {
             // cache must be compared by actual value, not RequestedMedia when invoked from JavaScript
@@ -116,7 +120,7 @@ namespace BlazorPro.BlazorSize
         {
             if (DotNetInstance != null)
             {
-                Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
+                mediaQueryJs.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
                 DotNetInstance = null;
             }
