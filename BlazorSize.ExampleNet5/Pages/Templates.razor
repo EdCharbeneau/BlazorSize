@@ -1,0 +1,27 @@
+﻿@inject WeatherForecastService Forecasts
+
+@using TestComponents
+@page "/templates"
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates adaptive rendering of a Blazor UI.</p>
+
+<MediaQuery Media="@Breakpoints.SmallDown">
+    <Matched>
+        <WeatherCards Data="forecasts"></WeatherCards>
+    </Matched>
+    <Unmatched>
+        <WeatherGrid Data="forecasts"></WeatherGrid>
+    </Unmatched>
+</MediaQuery>
+
+
+@code {
+    WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Forecasts.GetForecastAsync(DateTime.Now);
+    }
+}
