@@ -1,19 +1,14 @@
-﻿#if !NET5_0
-
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace BlazorPro.BlazorSize
 {
 
-    public partial class MediaQueryList : IDisposable
+    public partial class MediaQueryList
     {
-
-        // JavaScript namespace
-        const string ns = "blazorSizeMedia";
         [Inject] public IJSRuntime Js { get; set; }
 
         /// <summary>
@@ -50,20 +45,10 @@ namespace BlazorPro.BlazorSize
                 cache.MediaQueries.Remove(mediaQuery);
                 if (cache.MediaQueries.Count() == 0)
                 {
-                    Js.InvokeVoidAsync($"{ns}.removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
+                    mediaQueryJs.InvokeVoidAsync($"{ns}removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
                     mediaQueries.Remove(cache);
                 }
             }
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                DotNetInstance = DotNetObjectReference.Create(this);
-                await Js.InvokeVoidAsync($"{ns}.addMediaQueryList", DotNetInstance);
-            }
-            await base.OnAfterRenderAsync(firstRender);
         }
 
         public async Task Initialize(MediaQuery mediaQuery)
@@ -76,7 +61,7 @@ namespace BlazorPro.BlazorSize
                 if (!cache.Loading)
                 {
                     cache.Loading = true;
-                    var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.addMediaQueryToList", DotNetInstance, cache.MediaRequested);
+                    var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>($"{ns}addMediaQueryToList", DotNetInstance, cache.MediaRequested);
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
                     // When loading is complete dispatch an update to all subscribers.
@@ -88,7 +73,7 @@ namespace BlazorPro.BlazorSize
             }
             else
             {
-                var task = Js.InvokeAsync<MediaQueryArgs>($"{ns}.getMediaQueryArgs", cache.MediaRequested);
+                var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>($"{ns}getMediaQueryArgs", cache.MediaRequested);
                 cache.Value = await task;
 
                 mediaQuery.MediaQueryChanged(cache.Value);
@@ -112,38 +97,6 @@ namespace BlazorPro.BlazorSize
                 item.MediaQueryChanged(args);
             }
         }
-        public void Dispose()
-        {
-            if (DotNetInstance != null)
-            {
-                Js.InvokeVoidAsync($"{ns}.removeMediaQueryList", DotNetInstance);
-                DotNetInstance.Dispose();
-                DotNetInstance = null;
-            }
-        }
 
-        internal class MediaQueryCache
-        {
-            /// <summary>
-            /// Initally requested (unmodified) media query.
-            /// </summary>
-            public string MediaRequested { get; set; }
-
-            /// <summary>
-            /// Is this item already awating a JavaScript interop call.
-            /// </summary>
-            public bool Loading { get; set; }
-
-            /// <summary>
-            /// The actual value represented by the DOM. This may differ from the initially requested media query.
-            /// </summary>
-            public MediaQueryArgs Value { get; set; }
-
-            /// <summary>
-            /// Media Queries that share a RequestedMedia value. Used to aggregate event handlers and minimize JS calls.
-            /// </summary>
-            public List<MediaQuery> MediaQueries { get; set; } = new List<MediaQuery>();
-        }
     }
 }
-#endif

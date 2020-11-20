@@ -64,7 +64,6 @@
     <Content Include="*.ts">
       <Pack>False</Pack>
     </Content>
-    <Compile Remove="MediaQuery\MediaQueryList - Copy.razor.net5.cs" />
     <Content Update="*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
