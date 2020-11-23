@@ -15,15 +15,7 @@ dotnet add package BlazorPro.BlazorSize
 ```
 **.csproj**
 ```html
-<PackageReference Include="BlazorPro.BlazorSize" Version="2.*" />
-```
-
-## Reference the JavaScript interop
-
-Add the JavaScript interop to your application's index.html or _hosts.cshtml
-```html
-    <!--<script src="_content/BlazorPro.BlazorSize/blazorSize.js" type="module"></script>-->
-    <script src="_content/BlazorPro.BlazorSize/blazorSize.min.js"></script>
+<PackageReference Include="BlazorPro.BlazorSize" Version="3.*" />
 ```
 
 ## Import the namespace
@@ -36,7 +28,7 @@ Add a reference to the namespace in your _Imports.razor or at the top of a page.
 
 ## Add the MediaQueryList
 
-Add a MediaQueryList to your application's main layout or root. The MediaQueryList is responsponsible for communicating with all MediaQuery components in your app. The MediaQueryList component will consolidate redundant media queries and manage resources so that unused event listeners are disposed of properly.
+Add a MediaQueryList to your application's main layout or root. The MediaQueryList is responsible for communicating with all MediaQuery components in your app. The MediaQueryList component will consolidate redundant media queries and manage resources so that unused event listeners are disposed of properly.
 
 ```razor
 <MediaQueryList>
@@ -171,6 +163,18 @@ string BetweenMediumAndLargeOnly => Breakpoints.Between(Breakpoints.MediumUp, Br
 IsBetweenMediumAndLargeOnly = await listener.MatchMedia(BetweenMediumAndLargeOnly);
 
 ```
+
+## Reference the JavaScript interop
+
+**This is only needed for .NET 3.2 or below or if you plan to use the ResizeListener service**
+**If you only need to respond the user's device or screen size the **MediaQueryList & MediaQuery** components provide a **more performant** experience.**
+
+Add the JavaScript interop to your application's index.html or _hosts.cshtml
+```html
+    <!--<script src="_content/BlazorPro.BlazorSize/blazorSize.js" type="module"></script>-->
+    <script src="_content/BlazorPro.BlazorSize/blazorSize.min.js"></script>
+```
+
 ## Listening for the Resize event
 
 The ResizeListener is a service that allows your application to listen for the browser's resize event. The ResizeListener is a throttled to improve performance and can be adjusted thru configuration. If you only need to respond the user's device or screen size the **MediaQueryList & MediaQuery** components provide a **more performant** experience.
