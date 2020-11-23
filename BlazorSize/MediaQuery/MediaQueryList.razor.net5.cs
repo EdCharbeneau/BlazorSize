@@ -22,9 +22,25 @@ namespace BlazorPro.BlazorSize
                     );
 
                 DotNetInstance = DotNetObjectReference.Create(this);
-                await mediaQueryJs.InvokeVoidAsync("addMediaQueryList", DotNetInstance);
+                var result = mediaQueryJs.InvokeVoidAsync("addMediaQueryList", DotNetInstance);
+                await result;
+                // Because MediaQueries are added by the child component before IJSObjectReference completes.
+                // We must cache the MediaQueries and load them after the JS module is imported.
+                // On additional renders the module is already available and child components can self initialize.
+                await InitializeCachedMediaQueries();
             }
             await base.OnAfterRenderAsync(firstRender);
+
+            async Task InitializeCachedMediaQueries()
+            {
+                foreach (var item in mediaQueries)
+                {
+                    foreach (var mq in item.MediaQueries)
+                    {
+                        await Initialize(mq);
+                    }
+                }
+            }
         }
 
         public async ValueTask DisposeAsync()

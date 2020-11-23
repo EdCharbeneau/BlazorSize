@@ -53,6 +53,9 @@ namespace BlazorPro.BlazorSize
 
         public async Task Initialize(MediaQuery mediaQuery)
         {
+            // if the module is not loaded, deferred initialization to after import, InitializeCachedMediaQueries.
+            if (mediaQueryJs == null) return;
+
             var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
             if (cache.Value == null)
             {
