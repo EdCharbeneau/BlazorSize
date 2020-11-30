@@ -1,4 +1,4 @@
-﻿class ResizeOptions {
+﻿export class ResizeOptions {
     reportRate: number = 300;
     enableLogging: boolean = false;
     suppressInitEvent: boolean = false;
@@ -11,6 +11,15 @@ export class ResizeListener {
     private throttleResizeHandlerId: number = -1;
     private dotnet: any;
 
+    private resizeHandler = () => {
+        this.dotnet.invokeMethodAsync(
+            'RaiseOnResized', {
+            height: window.innerHeight,
+            width: window.innerWidth
+        });
+        this.logger("[BlazorSize] RaiseOnResized invoked");
+    }
+
     public listenForResize(dotnetRef: any, options: ResizeOptions) {
         this.options = options;
         this.dotnet = dotnetRef;
@@ -22,19 +31,12 @@ export class ResizeListener {
         }
     }
 
-    public throttleResizeHandler = () => {
+    private throttleResizeHandler = () => {
         clearTimeout(this.throttleResizeHandlerId);
         this.throttleResizeHandlerId = window.setTimeout(this.resizeHandler, this.options.reportRate);
     }
 
-    public resizeHandler = () => {
-        this.dotnet.invokeMethodAsync(
-            'RaiseOnResized', {
-            height: window.innerHeight,
-            width: window.innerWidth
-        });
-        this.logger("[BlazorSize] RaiseOnResized invoked");
-    }
+
 
     public cancelListener() {
         window.removeEventListener("resize", this.throttleResizeHandler);

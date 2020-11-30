@@ -1,4 +1,4 @@
-﻿#if !NET5_0
+﻿#if NET5_0
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System;
@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public class ResizeListener : IDisposable
+    public class ResizeListener : IAsyncDisposable
     {
-        const string ns = "blazorSize";
-        private readonly IJSRuntime jsRuntime;
+        private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+
         private readonly ResizeOptions options;
+        
         private bool disposed;
         public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
         {
             this.options = options.Value ?? new ResizeOptions();
-            this.jsRuntime = jsRuntime;
+            moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                        "import", "./_content/BlazorPro.BlazorSize/blazorSizeResizeModule.js").AsTask());
         }
 
-#nullable enable
         private EventHandler<BrowserWindowSize>? onResized;
 
         /// <summary>
@@ -29,7 +30,6 @@ namespace BlazorPro.BlazorSize
             add => Subscribe(value);
             remove => Unsubscribe(value);
         }
-#nullable disable
 
         private void Unsubscribe(EventHandler<BrowserWindowSize> value)
         {
@@ -49,26 +49,38 @@ namespace BlazorPro.BlazorSize
             onResized += value;
         }
 
-        private async ValueTask<bool> Start() =>
-            await jsRuntime.InvokeAsync<bool>($"{ns}.listenForResize", DotNetObjectReference.Create(this), options);
+        private async ValueTask<bool> Start()
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("listenForResize", DotNetObjectReference.Create(this), options);
+        }
 
-        private async ValueTask Cancel() =>
-            await jsRuntime.InvokeVoidAsync($"{ns}.cancelListener");
+        private async ValueTask Cancel()
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("cancelListener");
+        }
 
         /// <summary>
         /// Determine if the Document matches the provided media query.
         /// </summary>
         /// <param name="mediaQuery"></param>
         /// <returns>Returns true if matched.</returns>
-        public async ValueTask<bool> MatchMedia(string mediaQuery) =>
-            await jsRuntime.InvokeAsync<bool>($"{ns}.matchMedia", mediaQuery);
+        public async ValueTask<bool> MatchMedia(string mediaQuery)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("matchMedia", mediaQuery);
+        }
 
         /// <summary>
         /// Get the current BrowserWindowSize, this includes the Height and Width of the document.
         /// </summary>
         /// <returns></returns>
-        public async ValueTask<BrowserWindowSize> GetBrowserWindowSize() =>
-            await jsRuntime.InvokeAsync<BrowserWindowSize>($"{ns}.getBrowserWindowSize");
+        public async ValueTask<BrowserWindowSize> GetBrowserWindowSize()
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<BrowserWindowSize>("getBrowserWindowSize");
+        }
 
         /// <summary>
         /// Invoked by jsInterop, use the OnResized event handler to subscribe.
@@ -90,8 +102,13 @@ namespace BlazorPro.BlazorSize
             }
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
+            if (moduleTask.IsValueCreated)
+            {
+                var module = await moduleTask.Value;
+                await module.DisposeAsync();
+            }
             Dispose(true);
             GC.SuppressFinalize(this);
         }
