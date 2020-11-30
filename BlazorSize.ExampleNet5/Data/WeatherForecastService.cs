@@ -5,7 +5,7 @@ using TestComponents;
 
 namespace BlazorSize.ExampleNet5.Data
 {
-    public class WeatherForecastService
+    public class WeatherForecastService : IWeatherForecastService
     {
         private static readonly string[] Summaries = new[]
         {

@@ -1,3 +1,4 @@
+using BlazorPro.BlazorSize;
 using BlazorSize.ExampleNet5.Data;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TestComponents;
 
 namespace BlazorSize.ExampleNet5
 {
@@ -20,6 +22,8 @@ namespace BlazorSize.ExampleNet5
 
             builder.Services.AddScoped<WeatherForecastService>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped<ResizeListener>();
+            builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 
             await builder.Build().RunAsync();
         }
