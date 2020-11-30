@@ -164,17 +164,6 @@ IsBetweenMediumAndLargeOnly = await listener.MatchMedia(BetweenMediumAndLargeOnl
 
 ```
 
-## Reference the JavaScript interop
-
-**This is only needed for .NET 3.2 or below or if you plan to use the ResizeListener service**
-**If you only need to respond the user's device or screen size the **MediaQueryList & MediaQuery** components provide a **more performant** experience.**
-
-Add the JavaScript interop to your application's index.html or _hosts.cshtml
-```html
-    <!--<script src="_content/BlazorPro.BlazorSize/blazorSize.js" type="module"></script>-->
-    <script src="_content/BlazorPro.BlazorSize/blazorSize.min.js"></script>
-```
-
 ## Listening for the Resize event
 
 The ResizeListener is a service that allows your application to listen for the browser's resize event. The ResizeListener is a throttled to improve performance and can be adjusted thru configuration. If you only need to respond the user's device or screen size the **MediaQueryList & MediaQuery** components provide a **more performant** experience.
@@ -271,4 +260,13 @@ else
     }
 
 }
+```
+## Reference the JavaScript interop
+
+**This is only needed for .NET 3.2 or below**
+
+Add the JavaScript interop to your application's index.html or _hosts.cshtml
+```html
+    <!--<script src="_content/BlazorPro.BlazorSize/blazorSize.js" type="module"></script>-->
+    <script src="_content/BlazorPro.BlazorSize/blazorSize.min.js"></script>
 ```
