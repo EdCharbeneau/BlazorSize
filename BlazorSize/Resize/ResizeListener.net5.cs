@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public class ResizeListener : IAsyncDisposable
+    internal class ResizeListener : IResizeListener, IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
         private readonly ResizeOptions options;
         
         private bool disposed;
-        public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
+        public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions>? options = null)
         {
-            this.options = options.Value ?? new ResizeOptions();
+            this.options = options?.Value ?? new ResizeOptions();
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                         "import", "./_content/BlazorPro.BlazorSize/blazorSizeResizeModule.js").AsTask());
         }
@@ -31,18 +31,18 @@ namespace BlazorPro.BlazorSize
             remove => Unsubscribe(value);
         }
 
-        private void Unsubscribe(EventHandler<BrowserWindowSize> value)
+        private void Unsubscribe(EventHandler<BrowserWindowSize>? value)
         {
             onResized -= value;
-            if (onResized == null)
+            if (onResized is null)
             {
                 Cancel().ConfigureAwait(false);
             }
         }
 
-        private void Subscribe(EventHandler<BrowserWindowSize> value)
+        private void Subscribe(EventHandler<BrowserWindowSize>? value)
         {
-            if (onResized == null)
+            if (onResized is null)
             {
                 Task.Run(async () => await Start());
             }
