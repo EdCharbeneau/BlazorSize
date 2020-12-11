@@ -5,6 +5,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9.0</LangVersion>
+    <Nullable>Enable</Nullable>
     <Version>3.1.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>

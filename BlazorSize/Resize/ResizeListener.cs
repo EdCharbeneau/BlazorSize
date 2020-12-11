@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public class ResizeListener : IDisposable
+    internal class ResizeListener : IResizeListener, IDisposable
     {
         const string ns = "blazorSize";
         private readonly IJSRuntime jsRuntime;
         private readonly ResizeOptions options;
         private bool disposed;
+
         public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
         {
             this.options = options.Value ?? new ResizeOptions();
