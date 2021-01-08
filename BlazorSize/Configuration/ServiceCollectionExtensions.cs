@@ -17,5 +17,16 @@ namespace BlazorPro.BlazorSize
             services.Configure(configure);
             return services;
         }
+
+        /// <summary>
+        /// Adds a BlazorSize.MediaQueryService as a Scoped instance.
+        /// </summary>
+        /// <returns>Continues the IServiceCollection chain.</returns>
+        public static IServiceCollection AddMediaQueryService(this IServiceCollection services)
+        {
+            services.AddScoped<IMediaQueryService, MediaQueryService>();
+            return services;
+        }
+
     }
 }

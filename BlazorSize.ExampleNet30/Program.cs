@@ -20,11 +20,12 @@ namespace BlazorSize.ExampleNet30
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
             builder.Services.AddScoped<ResizeListener>();
-            builder.Services.AddScoped<IMediaQueryService, MediaQueryService>();
             builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 
+            //builder.Services.AddScoped<IMediaQueryService, MediaQueryService>();
+            builder.Services.AddMediaQueryService();
+            
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            await Task.Delay(1000);
             await builder.Build().RunAsync();
         }
     }
