@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public partial class MediaQuery : IDisposable
+    public partial class MediaQuery : IAsyncDisposable
     {
         /// <summary>
         /// Media Query string, using standard media query syntax.
@@ -80,9 +80,9 @@ namespace BlazorPro.BlazorSize
             }
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
-            MediaQueryList.RemoveQuery(this);
+           await MediaQueryList.RemoveQuery(this);
         }
     }
 }

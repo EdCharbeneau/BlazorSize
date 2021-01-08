@@ -1,88 +1,35 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-
     public partial class MediaQueryList
     {
-        [Inject] public IJSRuntime Js { get; set; }
+        // IMediaQueryService
+        [Inject] public IMediaQueryService MqService { get; set; }
 
         /// <summary>
         /// Application content where Media Query components may exist.
         /// </summary>
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        // JavaScript uses this value for tracking MediaQueryList instances.
-        private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; }
-        private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
-
-        private MediaQueryCache GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
-
-        public void AddQuery(MediaQuery newMediaQuery)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            var cache = GetMediaQueryFromCache(byMedia: newMediaQuery.Media);
-            if (cache == null)
+            if (firstRender)
             {
-                cache = new MediaQueryCache
-                {
-                    MediaRequested = newMediaQuery.Media,
-                };
-                mediaQueries.Add(cache);
+                await MqService.CreateMediaQueryList(DotNetObjectReference.Create(this));
+                await base.OnAfterRenderAsync(firstRender);
             }
-            cache.MediaQueries.Add(newMediaQuery);
+
         }
 
-        public void RemoveQuery(MediaQuery mediaQuery)
-        {
-            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
-            if (cache != null)
-            {
-
-                cache.MediaQueries.Remove(mediaQuery);
-                if (cache.MediaQueries.Count() == 0)
-                {
-                    mediaQueryJs.InvokeVoidAsync($"{ns}removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
-                    mediaQueries.Remove(cache);
-                }
-            }
-        }
-
-        public async Task Initialize(MediaQuery mediaQuery)
-        {
-            // if the module is not loaded, deferred initialization to after import, InitializeCachedMediaQueries.
-            if (mediaQueryJs == null) return;
-
-            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
-            if (cache.Value == null)
-            {
-                // If we don't flag the cache as loading, duplicate requests will be sent async.
-                // Duplicate requests = poor performance, esp with web sockets.
-                if (!cache.Loading)
-                {
-                    cache.Loading = true;
-                    var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>($"{ns}addMediaQueryToList", DotNetInstance, cache.MediaRequested);
-                    cache.Value = await task;
-                    cache.Loading = task.IsCompleted;
-                    // When loading is complete dispatch an update to all subscribers.
-                    foreach (var item in cache.MediaQueries)
-                    {
-                        item.MediaQueryChanged(cache.Value);
-                    }
-                }
-            }
-            else
-            {
-                var task = mediaQueryJs.InvokeAsync<MediaQueryArgs>($"{ns}getMediaQueryArgs", cache.MediaRequested);
-                cache.Value = await task;
-
-                mediaQuery.MediaQueryChanged(cache.Value);
-            }
-        }
-
+        public void AddQuery(MediaQuery newMediaQuery) => MqService.AddQuery(newMediaQuery);
+        public async Task RemoveQuery(MediaQuery mediaQuery) => await MqService.RemoveQuery(mediaQuery);
+        public async Task Initialize(MediaQuery mediaQuery) => await MqService.Initialize(mediaQuery);
         /// <summary>
         /// Called by JavaScript when a media query changes in the dom.
         /// </summary>
@@ -92,7 +39,7 @@ namespace BlazorPro.BlazorSize
         {
             // cache must be compared by actual value, not RequestedMedia when invoked from JavaScript
             // DOM Media value my be different that the initally requested media query value.
-            var cache = mediaQueries.Find(q => q.Value.Media == args.Media);
+            var cache = MqService.MediaQueries.Find(q => q.Value.Media == args.Media);
 
             // Dispatch events to all subscribers
             foreach (var item in cache.MediaQueries)
@@ -100,6 +47,5 @@ namespace BlazorPro.BlazorSize
                 item.MediaQueryChanged(args);
             }
         }
-
     }
 }
