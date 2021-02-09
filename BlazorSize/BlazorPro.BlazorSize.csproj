@@ -78,8 +78,5 @@
   </ItemGroup>
 
   <!-- static resources _content/* -->
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
   <!-- / Nuget Info -->
 </Project>

@@ -2,9 +2,9 @@
 @inject ResizeListener listener
 @page "/"
 
-<h3>Height: @browser.Height</h3>
-<h3>Width: @browser.Width</h3>
-<h3>MQ: @IsSmallMedia</h3>
+<h3>Height: <span id="browserHeight">@browser.Height</span></h3>
+<h3>Width: <span id="browserWidth">@browser.Width</span></h3>
+<h3>MQ: <span id="isSmallMedia">@IsSmallMedia</span></h3>
 
 @code {
 

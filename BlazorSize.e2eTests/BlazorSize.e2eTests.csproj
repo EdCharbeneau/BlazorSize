@@ -1,0 +1,99 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0241A973-6232-4FD2-A3F2-11CF65C27FEA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlazorSize.e2eTests</RootNamespace>
+    <AssemblyName>BlazorSize.e2eTests</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="ArtOfTest.WebAii">
+      <RequiredTargetFramework>4.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ArtOfTest.WebAii.Design">
+      <RequiredTargetFramework>4.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Telerik.WebAii.Controls.Html" />
+    <Reference Include="Telerik.WebAii.Controls.Xaml" />
+    <Reference Include="Telerik.TestingFramework.Controls.KendoUI" />
+    <Reference Include="Telerik.TestingFramework.Controls.KendoUI.Angular" />
+    <Reference Include="Telerik.TestingFramework.Controls.TelerikUI.Blazor" />
+    <Reference Include="Telerik.TestStudio.Translators.Common" />
+    <Reference Include="Telerik.WebAii.Controls.Xaml.Wpf, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlazorSize Size Tests.tstest.cs">
+      <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="BlazorSize Construct &amp; Dispose.imgstore">
+      <DependentUpon>BlazorSize Construct &amp; Dispose.tstest</DependentUpon>
+    </None>
+    <None Include="BlazorSize Construct &amp; Dispose.tstest" />
+    <None Include="BlazorSize Size Tests.imgstore">
+      <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
+    </None>
+    <None Include="BlazorSize Size Tests.tstest" />
+    <None Include="Settings.aiis" />
+    <None Include="TestLists\BlazorSize .NET 5.aiilist" />
+    <None Include="TestLists\BlazorSize.aiilist" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BlazorSize Construct &amp; Dispose.resx">
+      <DependentUpon>BlazorSize Construct &amp; Dispose.tstest</DependentUpon>
+    </EmbeddedResource>
+    <None Include="BlazorSize Size Tests.resx">
+      <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="$(MSBuildExtensionsPath)\Telerik\WebUITestStudio\Telerik.WebUITestStudio.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Name="BlazorSize.e2eTests" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -340,3 +340,6 @@ ASALocalRun/
 healthchecksdb
 /BlazorSize/scripts/tests/*.js
 /BlazorSize/wwwroot/*.js
+/BlazorSize.e2eTests/Pages.g.cs
+/BlazorSize.e2eTests/Results
+/BlazorSize.e2eTests/.ts/project.state

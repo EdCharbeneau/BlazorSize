@@ -13,12 +13,9 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <ProjectReference Include="..\BlazorSize\BlazorPro.BlazorSize.csproj" />
   </ItemGroup>
+
+  <!-- static resources _content/* -->
 
 </Project>
