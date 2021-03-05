@@ -15,7 +15,7 @@ namespace BlazorPro.BlazorSize
 
         public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions> options = null)
         {
-            this.options = options.Value ?? new ResizeOptions();
+            this.options = options?.Value ?? new ResizeOptions();
             this.jsRuntime = jsRuntime;
         }
 
