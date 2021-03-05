@@ -62,6 +62,7 @@
       <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="BlazorSize Adaptive Table and Template.tstest" />
     <None Include="BlazorSize Construct &amp; Dispose.imgstore">
       <DependentUpon>BlazorSize Construct &amp; Dispose.tstest</DependentUpon>
     </None>
@@ -70,6 +71,7 @@
       <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
     </None>
     <None Include="BlazorSize Size Tests.tstest" />
+    <None Include="BlazorSize Test Multicast.tstest" />
     <None Include="Settings.aiis" />
     <None Include="TestLists\BlazorSize .NET 5.aiilist" />
     <None Include="TestLists\BlazorSize.aiilist" />
