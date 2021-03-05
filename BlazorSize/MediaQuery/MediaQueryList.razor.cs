@@ -41,6 +41,8 @@ namespace BlazorPro.BlazorSize
             // DOM Media value my be different that the initally requested media query value.
             var cache = MqService.MediaQueries.Find(q => q.Value.Media == args.Media);
 
+            if (cache is null) return;
+
             // Dispatch events to all subscribers
             foreach (var item in cache.MediaQueries)
             {

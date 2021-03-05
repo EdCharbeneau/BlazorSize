@@ -9,6 +9,5 @@ namespace BlazorPro.BlazorSize
 
         ValueTask<BrowserWindowSize> GetBrowserWindowSize();
         ValueTask<bool> MatchMedia(string mediaQuery);
-        void RaiseOnResized(BrowserWindowSize browserWindowSize);
     }
 }
