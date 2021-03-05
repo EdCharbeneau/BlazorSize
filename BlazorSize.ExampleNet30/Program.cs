@@ -19,7 +19,7 @@ namespace BlazorSize.ExampleNet30
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-            builder.Services.AddScoped<ResizeListener>();
+            builder.Services.AddScoped<IResizeListener, ResizeListener>();
             builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 
             //builder.Services.AddScoped<IMediaQueryService, MediaQueryService>();

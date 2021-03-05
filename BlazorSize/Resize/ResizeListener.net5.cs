@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorPro.BlazorSize
 {
-    public class ResizeListener : IAsyncDisposable
+    public class ResizeListener : IResizeListener, IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
