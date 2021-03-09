@@ -4,8 +4,8 @@ let instance = new BlazorSizeMedia();
 
 // When MQL is created, it tracks a NET Ref 
 export function addMediaQueryList(dotnet: any) {
-    console.log(`addMediaQueryList dotnet:`);
-    console.log(dotnet);
+    //console.log(`addMediaQueryList dotnet:`);
+    //console.log(dotnet);
     instance.addMediaQueryList(dotnet);
 }
 
@@ -16,15 +16,15 @@ export function removeMediaQueryList(dotnetMql: any) {
 
 // When MediaQuery instance is created track media query in JavaScript
 export function addMediaQueryToList(dotnetMql: any, mediaQuery: string) {
-    console.log(`addMediaQueryToList dotnet:`);
-    console.log(dotnetMql);
+    //console.log(`addMediaQueryToList dotnet:`);
+    //console.log(dotnetMql);
     return instance.addMediaQueryToList(dotnetMql, mediaQuery);
 }
 
 // When MediaQuery instance is disposed remove media query in JavaScript
 export function removeMediaQuery(dotnetMql: any, mediaQuery: string) {
-    console.log(`removeMediaQuery dotnet`);
-    console.log(dotnetMql);
+    //console.log(`removeMediaQuery dotnet`);
+    //console.log(dotnetMql);
     instance.removeMediaQuery(dotnetMql, mediaQuery);
 }
 
