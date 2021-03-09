@@ -45,7 +45,7 @@ namespace BlazorPro.BlazorSize
             if (cache != null)
             {
                 cache.MediaQueries.Remove(mediaQuery);
-                if (cache.MediaQueries.Any())
+                if (cache.MediaQueries.Count == 0)
                 {
                     mediaQueries.Remove(cache);
                     var module = await moduleTask.Value;
@@ -70,7 +70,7 @@ namespace BlazorPro.BlazorSize
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
                     // When loading is complete dispatch an update to all subscribers.
-                    foreach (var item in cache.MediaQueries)
+                    foreach (var item in cache.MediaQueries.ToArray())
                     {
                         item.MediaQueryChanged(cache.Value);
                     }
