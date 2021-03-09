@@ -1,0 +1,12 @@
+﻿@page "/deep"
+<h3>Deep Nesting</h3>
+
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
+@if (IsSmall)
+{
+    <ScreenSizeReporter />
+}
+
+@code {
+    bool IsSmall;
+}

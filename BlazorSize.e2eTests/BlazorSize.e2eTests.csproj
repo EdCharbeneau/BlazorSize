@@ -71,6 +71,9 @@
       <DependentUpon>BlazorSize Size Tests.tstest</DependentUpon>
     </None>
     <None Include="BlazorSize Size Tests.tstest" />
+    <None Include="BlazorSize Test Deep Nesting.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BlazorSize Test Multicast.tstest" />
     <None Include="Settings.aiis" />
     <None Include="TestLists\BlazorSize .NET 5.aiilist" />
