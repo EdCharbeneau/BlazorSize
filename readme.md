@@ -26,6 +26,17 @@ Add a reference to the namespace in your _Imports.razor or at the top of a page.
 @using BlazorPro.BlazorSize
 ```
 
+### Configure DI
+
+**new in 3.2.1**
+
+In startup.cs register ResizeListener with the applications service collection.
+
+
+```razor
+services.AddMediaQueryService();
+```
+
 ## Add the MediaQueryList
 
 Add a MediaQueryList to your application's main layout or root. The MediaQueryList is responsible for communicating with all MediaQuery components in your app. The MediaQueryList component will consolidate redundant media queries and manage resources so that unused event listeners are disposed of properly.
