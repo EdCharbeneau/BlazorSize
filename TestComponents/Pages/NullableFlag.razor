@@ -1,0 +1,21 @@
+﻿@page "/nullable"
+@if (IsSmall.HasValue)
+{
+    if (IsSmall.Value)
+    {
+        <h1>Small</h1>
+    }
+    else
+    {
+       <h1>Large</h1>
+    }
+} else
+{
+    <span>Waiting for JavaScript interop...</span>
+}
+
+<MediaQuery Media="@Breakpoints.SmallDown" MatchesChanged="@(matched => IsSmall = matched)"></MediaQuery>
+
+@code {
+    bool? IsSmall = null;
+}
