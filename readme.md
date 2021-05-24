@@ -199,7 +199,7 @@ services.AddScoped<ResizeListener>();
 This example shows how to get the browsers width/height and check for media query matches. Depending on the matched media query the view can toggle between two components WeatherGrid or WeatherCards.
 
 ```razor
-@inject ResizeListener listener
+@inject IResizeListener listener
 @implements IDisposable
 @page "/fetchdata"
 
