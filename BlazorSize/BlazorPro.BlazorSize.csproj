@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>9.0</LangVersion>
-    <Version>3.2.0</Version>
+    <Version>5.0.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -16,6 +16,8 @@
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+      5.0.0 Added support for bUnit. Removed support for .NET 3.x
+      4.0.0 no release, aligning with .NET 5.0. Next version will no longer support .NET 3.x
       3.2.0
       Added service interfaces, IMediaQueryService, IResizeListener to support unit testing scenarios
       Added end-to-end testing on source for QA
@@ -38,18 +40,15 @@
       1.2.0
       Full-release
     </PackageReleaseNotes>
-    <AssemblyVersion>3.2.0.0</AssemblyVersion>
-    <FileVersion>3.2.0.0</FileVersion>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
     <PackageId>BlazorPro.BlazorSize</PackageId>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="bunit.core">
+      <Version>1.2.27-preview</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
@@ -72,8 +71,6 @@
     <Content Include="*.ts">
       <Pack>False</Pack>
     </Content>
-    <Compile Remove="MediaQuery\MediaQueryList.razor.net2.cs" />
-    <Compile Remove="MediaQuery\MediaQueryList.razor.net5.cs" />
     <Content Update="*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
