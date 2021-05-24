@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorPro.BlazorSize.Bunit\BlazorPro.BlazorSize.Bunit.csproj" />
     <ProjectReference Include="..\BlazorSize\BlazorPro.BlazorSize.csproj" />
   </ItemGroup>
 

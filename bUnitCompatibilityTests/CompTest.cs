@@ -4,7 +4,7 @@ using Xunit;
 
 namespace bUnitCompatibilityTests
 {
-    public class MyCompTest
+    public class CompTest
     {
         [Fact]
         public void Shows_Correct_Content_Based_On_MediaQuery()
