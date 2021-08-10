@@ -6,7 +6,7 @@ BlazorSize was designed to allow Razor Components to implement adaptive renderin
 
 <br/>
 
-![Sponsored by Progress Software, Telerik DevCraft]()
+![Telerik UI for Blazor, Increase productivity and cut costs in half. Try Now](https://github.com/EdCharbeneau/BlazorSize/blob/master/_sponsors/Telerik/Blazor-300x250.png?raw=true)
 
 A component with similar functionality of BlazorSize can also be found in [Telerik UI for Blazor](https://demos.telerik.com/blazor-ui/mediaquery/overview?utm_source=EdCharbeneau&utm_medium=cpm&utm_campaign=blazor-github-sponsored-message). 
 
