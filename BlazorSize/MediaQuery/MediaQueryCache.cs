@@ -6,7 +6,7 @@ namespace BlazorPro.BlazorSize
         /// <summary>
         /// Initally requested (unmodified) media query.
         /// </summary>
-        public string MediaRequested { get; set; }
+        public string? MediaRequested { get; set; }
 
         /// <summary>
         /// Is this item already awating a JavaScript interop call.
@@ -16,7 +16,7 @@ namespace BlazorPro.BlazorSize
         /// <summary>
         /// The actual value represented by the DOM. This may differ from the initially requested media query.
         /// </summary>
-        public MediaQueryArgs Value { get; set; }
+        public MediaQueryArgs? Value { get; set; }
 
         /// <summary>
         /// Media Queries that share a RequestedMedia value. Used to aggregate event handlers and minimize JS calls.

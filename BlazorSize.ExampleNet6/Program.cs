@@ -1,5 +1,5 @@
 using BlazorPro.BlazorSize;
-using BlazorSize.ExampleNet5.Data;
+using BlazorSize.ExampleNet6.Data;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestComponents;
 
-namespace BlazorSize.ExampleNet5
+namespace BlazorSize.ExampleNet6
 {
     public class Program
     {

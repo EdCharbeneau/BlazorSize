@@ -10,7 +10,7 @@ namespace BlazorPro.BlazorSize
         /// Media Query string, using standard media query syntax.
         /// Ex: "(max-width: 767.98px)"
         /// </summary>
-        [Parameter] public string Media { get; set; }
+        [Parameter] public string Media { get; set; } = "";
 
         /// <summary>
         /// The result of the specified Media property.
@@ -28,18 +28,18 @@ namespace BlazorPro.BlazorSize
         /// Optional template, shown only when the Matches value is true.
         /// Using a template will disable @bind-Matches for performance.
         /// </summary>
-        [Parameter] public RenderFragment Matched { get; set; }
+        [Parameter] public RenderFragment? Matched { get; set; }
 
         /// <summary>
         /// Optional template, shown only when the Matches value is false.
         /// Using a template will disable @bind-Matches for performance.
         /// </summary>
-        [Parameter] public RenderFragment Unmatched { get; set; }
+        [Parameter] public RenderFragment? Unmatched { get; set; }
 
         /// <summary>
         /// Gets the parent MediaQueryList container.
         /// </summary>
-        [CascadingParameter] public MediaQueryList MediaQueryList { get; set; }
+        [CascadingParameter] public MediaQueryList? MediaQueryList { get; set; }
 
         /// <summary>
         /// Set by the DOM, the InternalMedia represents the actual Media Query value held by the DOM.
@@ -60,6 +60,7 @@ namespace BlazorPro.BlazorSize
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            if (MediaQueryList == null) return;
             if (firstRender)
             {
                 await MediaQueryList.Initialize(this);
@@ -82,7 +83,8 @@ namespace BlazorPro.BlazorSize
 
         public async ValueTask DisposeAsync()
         {
-           await MediaQueryList.RemoveQuery(this);
+            if (MediaQueryList == null) return;
+            await MediaQueryList.RemoveQuery(this);
         }
     }
 }

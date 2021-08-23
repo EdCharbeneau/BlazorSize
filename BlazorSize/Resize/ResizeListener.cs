@@ -1,5 +1,4 @@
-﻿#if NET5_0
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
@@ -114,4 +113,3 @@ namespace BlazorPro.BlazorSize
         }
     }
 }
-#endif

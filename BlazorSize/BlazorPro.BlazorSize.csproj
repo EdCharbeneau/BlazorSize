@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0</TargetFrameworks>
-    <RazorLangVersion>3.0</RazorLangVersion>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Nullable>enable</Nullable>
     <LangVersion>9.0</LangVersion>
-    <Version>5.0.0</Version>
+    <Version>6.0.0-pre</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -40,15 +40,16 @@
       1.2.0
       Full-release
     </PackageReleaseNotes>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
-    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <FileVersion>6.0.0.0</FileVersion>
     <PackageId>BlazorPro.BlazorSize</PackageId>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">-->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0-preview.7.21378.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.7.21378.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.7.21377.19" />
   </ItemGroup>
 
   <!-- NuGet info -->
@@ -68,7 +69,7 @@
     <Content Include="*.ts">
       <Pack>False</Pack>
     </Content>
-    <PackageReference Include="bunit.core" Version="1.1.5" />
+    <PackageReference Include="bunit.core" Version="1.2.49" />
     <Content Update="*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
