@@ -1,6 +1,4 @@
-﻿#if NET5_0
-
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +17,11 @@ namespace BlazorPro.BlazorSize
         }
 
         // JavaScript uses this value for tracking MediaQueryList instances.
-        private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; }
+        private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; } = null!;
         private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
         public List<MediaQueryCache> MediaQueries => mediaQueries;
 
-        private MediaQueryCache GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
+        private MediaQueryCache? GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
 
         public void AddQuery(MediaQuery newMediaQuery)
         {
@@ -41,22 +39,27 @@ namespace BlazorPro.BlazorSize
 
         public async Task RemoveQuery(MediaQuery mediaQuery)
         {
+            if (mediaQuery == null) return;
+
             var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
-            if (cache != null)
+           
+            if (cache == null) return;
+
+            cache.MediaQueries.Remove(mediaQuery);
+            if (cache.MediaQueries.Any())
             {
-                cache.MediaQueries.Remove(mediaQuery);
-                if (cache.MediaQueries.Any())
-                {
-                    mediaQueries.Remove(cache);
-                    var module = await moduleTask.Value;
-                    await module.InvokeVoidAsync($"removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
-                }
+                mediaQueries.Remove(cache);
+                var module = await moduleTask.Value;
+                await module.InvokeVoidAsync($"removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
             }
         }
 
         public async Task Initialize(MediaQuery mediaQuery)
         {
+            if (mediaQuery?.Media == null) return;
             var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
+            if (cache == null) return;
+
             if (cache.Value == null)
             {
                 // If we don't flag the cache as loading, duplicate requests will be sent async.
@@ -100,11 +103,9 @@ namespace BlazorPro.BlazorSize
                 var module = await moduleTask.Value;
                 await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
-                DotNetInstance = null;
             }
         }
 
     }
 
 }
-#endif

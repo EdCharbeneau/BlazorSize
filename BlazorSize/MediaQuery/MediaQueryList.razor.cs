@@ -10,12 +10,12 @@ namespace BlazorPro.BlazorSize
     public partial class MediaQueryList
     {
         // IMediaQueryService
-        [Inject] public IMediaQueryService MqService { get; set; }
+        [Inject] public IMediaQueryService MqService { get; set; } = null!;
 
         /// <summary>
         /// Application content where Media Query components may exist.
         /// </summary>
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment? ChildContent { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -39,7 +39,7 @@ namespace BlazorPro.BlazorSize
         {
             // cache must be compared by actual value, not RequestedMedia when invoked from JavaScript
             // DOM Media value my be different that the initally requested media query value.
-            var cache = MqService.MediaQueries.Find(q => q.Value.Media == args.Media);
+            var cache = MqService.MediaQueries.Find(q => q.Value?.Media == args.Media);
 
             if (cache is null) return;
 

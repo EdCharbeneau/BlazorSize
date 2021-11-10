@@ -12,15 +12,16 @@
     "CurrentReferences": [
       "System",
       "System.Core",
-      "ArtOfTest.WebAii, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
-      "ArtOfTest.WebAii.Design, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
-      "Telerik.WebAii.Controls.Html, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestStudio.Translators.Common, Version=2020.3.1209.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "ArtOfTest.WebAii, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Messaging, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Design, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
+      "Telerik.WebAii.Controls.Html, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestStudio.Translators.Common, Version=2021.2.727.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
       "System.Windows.Forms"
     ],
@@ -191,7 +192,7 @@
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
               "__value": {
-                "Code": "            Actions.InvokeScript(@\"openWin(\"\"size\"\", 1920, 1080)\");",
+                "Code": "            Actions.InvokeScript(@\"openWin(\"\"size\"\", 560, 800)\");",
                 "RequiresSilverlight": false,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,
@@ -214,7 +215,7 @@
             },
             "Enabled": true,
             "Order": 3,
-            "Id": "OpenWin",
+            "Id": "OpenWin_Mobile",
             "StepState": 1,
             "ContinueOnFailure": false,
             "StepImageKey": "CanIResizef0fvq1ce.iak",
@@ -275,14 +276,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "a29f97ab-a1fe-4eb2-9bbd-46f5df7162fc",
+            "Runtime ID": "688c1dd9-0a9f-49f6-bcc2-a3eb5a3a8278",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
-            "CustomDescription": null,
+            "CustomDescription": "Verify 'class' attribute 'Same' value 'list-group-item' on 'LargeListItem'",
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
                 "AttributeName": "class",
-                "AttributeValue": "list-group-item active",
+                "AttributeValue": "list-group-item",
                 "CompareType": 1,
                 "DataBindVariableName": null,
                 "Timeout": 30000,
@@ -392,7 +393,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CanIResizel5qyv3n3.ou0",
+            "StepImageKey": "BlazorSize Size Testslqd4jwd5.lnt",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -401,7 +402,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "de17165f-ecd2-4ae1-84bd-d190c2547b34",
+            "Runtime ID": "0348c5d7-c3bf-45d9-b7b4-d156aa79234a",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item' on 'MediumListItem'",
             "CustomDescription": null,
             "Step": {
@@ -518,7 +519,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CanIResizem51vub0o.eix",
+            "StepImageKey": "BlazorSize Size Testsz30hzhwa.50g",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -527,14 +528,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "005fb7c0-9ecf-407f-b1d4-489ef8b96050",
-            "Description": "Verify 'class' attribute 'Same' value 'list-group-item' on 'SmallListItem'",
+            "Runtime ID": "f612777b-2d6f-4fe4-ae04-405e8f0537a3",
+            "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'SmallListItem'",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
                 "AttributeName": "class",
-                "AttributeValue": "list-group-item",
+                "AttributeValue": "list-group-item active",
                 "CompareType": 1,
                 "DataBindVariableName": null,
                 "Timeout": 30000,
@@ -644,7 +645,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CanIResizee5tx2ctc.uh3",
+            "StepImageKey": "BlazorSize Size Testsqqpn25kr.amm",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -696,7 +697,7 @@
           "__value": {
             "Runtime ID": "33c1fd74-d1db-4aaa-9f59-54cf0d853244",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
-            "CustomDescription": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
+            "CustomDescription": "Verify 'class' attribute 'Same' value 'list-group-item' on 'LargeListItem'",
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
@@ -822,7 +823,7 @@
           "__value": {
             "Runtime ID": "fec075a2-cb06-4086-b6e2-7c87a24c10af",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'MediumListItem'",
-            "CustomDescription": null,
+            "CustomDescription": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'MediumListItem'",
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
@@ -1078,7 +1079,7 @@
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
               "__value": {
-                "Code": "            Manager.Browsers[0].Actions.InvokeScript(@\"resizeWin(560,800)\");",
+                "Code": "            Manager.Browsers[0].Actions.InvokeScript(@\"resizeWin(1920,1080)\");",
                 "RequiresSilverlight": false,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,
@@ -1101,7 +1102,7 @@
             },
             "Enabled": true,
             "Order": 12,
-            "Id": "Resize_Mobile",
+            "Id": "Resize_Desktop",
             "StepState": 1,
             "ContinueOnFailure": false,
             "StepImageKey": "CanIResizete4bjiie.ndc",
@@ -1113,14 +1114,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "688c1dd9-0a9f-49f6-bcc2-a3eb5a3a8278",
+            "Runtime ID": "a29f97ab-a1fe-4eb2-9bbd-46f5df7162fc",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
-            "CustomDescription": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
+            "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
                 "AttributeName": "class",
-                "AttributeValue": "list-group-item",
+                "AttributeValue": "list-group-item active",
                 "CompareType": 1,
                 "DataBindVariableName": null,
                 "Timeout": 30000,
@@ -1230,7 +1231,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "BlazorSize Size Testslqd4jwd5.lnt",
+            "StepImageKey": "CanIResizel5qyv3n3.ou0",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -1239,7 +1240,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "0348c5d7-c3bf-45d9-b7b4-d156aa79234a",
+            "Runtime ID": "de17165f-ecd2-4ae1-84bd-d190c2547b34",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item' on 'MediumListItem'",
             "CustomDescription": null,
             "Step": {
@@ -1356,7 +1357,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "BlazorSize Size Testsz30hzhwa.50g",
+            "StepImageKey": "CanIResizem51vub0o.eix",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -1365,14 +1366,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "f612777b-2d6f-4fe4-ae04-405e8f0537a3",
-            "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'SmallListItem'",
+            "Runtime ID": "005fb7c0-9ecf-407f-b1d4-489ef8b96050",
+            "Description": "Verify 'class' attribute 'Same' value 'list-group-item' on 'SmallListItem'",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.AttributeVerificationDescriptor",
               "__value": {
                 "AttributeName": "class",
-                "AttributeValue": "list-group-item active",
+                "AttributeValue": "list-group-item",
                 "CompareType": 1,
                 "DataBindVariableName": null,
                 "Timeout": 30000,
@@ -1482,7 +1483,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "BlazorSize Size Testsqqpn25kr.amm",
+            "StepImageKey": "CanIResizee5tx2ctc.uh3",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -1551,10 +1552,10 @@
     "UseDefaultWpfAppPath": false,
     "TestAssembly": "BlazorSize.e2eTests.dll",
     "TestAssemblyPath": "bin",
-    "TestClass": "BlazorSize.e2eTests.CanIResize",
+    "TestClass": "BlazorSize.e2eTests.CanIResizeReverse",
     "IsManual": false,
-    "ResourceFilePath": "BlazorSize Size Tests.resx",
-    "ElementImageStoreFilePath": "BlazorSize Size Tests.imgstore",
+    "ResourceFilePath": "BlazorSize Size Reverse.resx",
+    "ElementImageStoreFilePath": "BlazorSize Size Reverse.imgstore",
     "HasCodeBehind": true,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -1587,13 +1588,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "BlazorSize Size Tests",
+    "Name": "BlazorSize Size Reverse",
     "Owner": "",
-    "Path": "BlazorSize Size Tests.tstest",
+    "Path": "BlazorSize Size Reverse.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "1c6f74bd-1a14-4014-a8c9-02fdb3cb8302",
-    "Id": "1c6f74bd-1a14-4014-a8c9-02fdb3cb8302",
+    "UniqueId": "d3bce0f5-b6f6-45aa-959a-5c1c1753902b",
+    "Id": "d3bce0f5-b6f6-45aa-959a-5c1c1753902b",
     "ProjectId": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b",
     "Version": 200
   }

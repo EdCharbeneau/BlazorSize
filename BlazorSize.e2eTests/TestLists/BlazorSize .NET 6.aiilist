@@ -3,7 +3,7 @@
   "__value": {
     "TestListId": "f9449235-bf5e-4504-8109-14a9a1491f56",
     "Id": "f9449235-bf5e-4504-8109-14a9a1491f56",
-    "TestListName": "BlazorSize .NET 5",
+    "TestListName": "BlazorSize .NET 6",
     "CreationDate": "2021-02-09T13:21:46-05:00",
     "OwnerName": null,
     "Settings": {
@@ -30,7 +30,7 @@
             "WebAppPhysicalPath": "",
             "DefaultBrowser": 10,
             "EnableScriptLogging": false,
-            "BaseUrl": "https://localhost:5001",
+            "BaseUrl": "https://localhost:44343/",
             "KillBrowserProcessOnClose": false,
             "KillBrowsersBeforeStart": true,
             "AutoCalibrateBrowsers": false,
@@ -94,8 +94,7 @@
         ]
       }
     },
-    "ListType": 0, 
-"ProjectId": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b",
+    "ListType": 0,
     "ProjectId": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b"
   }
 }

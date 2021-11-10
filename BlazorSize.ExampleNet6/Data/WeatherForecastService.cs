@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestComponents;
 
-namespace BlazorSize.ExampleNet5.Data
+namespace BlazorSize.ExampleNet6.Data
 {
     public class WeatherForecastService : IWeatherForecastService
     {

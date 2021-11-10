@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BlazorPro.BlazorSize;
-using Bunit;
+﻿using BlazorPro.BlazorSize;
 using Microsoft.JSInterop;
 
 namespace Bunit
@@ -9,7 +6,7 @@ namespace Bunit
     public class FakeMediaQueryService : IMediaQueryService
     {
         private readonly TestContextBase contextBase;
-        private MediaQueryArgs? activeMediaQuery = null;
+        private MediaQueryArgs activeMediaQuery = null!;
 
         public List<MediaQueryCache> MediaQueries { get; } = new();
 
@@ -65,8 +62,7 @@ namespace Bunit
 
         public void SetActiveMediaQuery(MediaQueryArgs args)
         {
-            if (args is null)
-                return;
+            if (args.Media == null) return;
 
             activeMediaQuery = args;
 
@@ -86,7 +82,7 @@ namespace Bunit
             });
         }
 
-        private MediaQueryCache GetMediaQueryFromCache(string byMedia)
+        private MediaQueryCache? GetMediaQueryFromCache(string byMedia)
             => MediaQueries?.Find(q => q.MediaRequested == byMedia);
     }
 }

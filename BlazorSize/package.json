@@ -6,8 +6,7 @@
   "scripts": {
     "test": "tsc -p tsconfig.json && jest && npm run posttest",
     "posttest": "rimraf scripts/tests/*.js",
-    "bundle": "rollup -c rollup.config.js",
-    "build": "tsc -p tsconfig.build.json && npm run bundle"
+    "build": "tsc -p tsconfig.build.json"
   },
   "author": "",
   "license": "ISC",
