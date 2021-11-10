@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BlazorPro.BlazorSize;
-using Bunit;
+﻿using BlazorPro.BlazorSize;
 using Microsoft.JSInterop;
 
 namespace Bunit

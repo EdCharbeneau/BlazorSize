@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <LangVersion>latest</LangVersion>
+    <Version>6.0.0-pre2</Version>
+    <Authors>Ed Charbeneau</Authors>
+    <Company>EdCharbeneau.com</Company>
+    <Description>A testing library to provide helper extensions for BlazorSize.</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/EdCharbeneau/BlazorSize</PackageProjectUrl>
+    <PackageIcon>blazor-glove-128.jpg</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
+    <PackageTags>Blazor, JavaScript Interop</PackageTags>
+    <PackageReleaseNotes>
+      6.0.0 Added support for bUnit.
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Package Logo -->
+    <None Include="..\_resources\blazor-glove-128.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <!-- Package license file -->
+    <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bunit.core" Version="1.3.42" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorSize\BlazorPro.BlazorSize.csproj" />
+  </ItemGroup>
+
+</Project>

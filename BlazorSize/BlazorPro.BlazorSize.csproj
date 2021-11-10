@@ -4,8 +4,8 @@
     <TargetFrameworks>net6.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Nullable>enable</Nullable>
-    <LangVersion>9.0</LangVersion>
-    <Version>6.0.0-pre</Version>
+    <LangVersion>latest</LangVersion>
+    <Version>6.0.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+      6.0.0 Fixed possible null issues. .NET 6 support. Moved APIs for bUnit to BlazorPro.BlazorSize.UnitTesting. 
       5.0.0 Added support for bUnit. Removed support for .NET 3.x
       4.0.0 no release, aligning with .NET 5.0. Next version will no longer support .NET 3.x
       3.2.0
@@ -47,9 +48,9 @@
 
   <!--<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">-->
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.1.21451.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
   <!-- NuGet info -->
@@ -69,7 +70,7 @@
     <Content Include="*.ts">
       <Pack>False</Pack>
     </Content>
-    <PackageReference Include="bunit.core" Version="1.2.49" />
+    <PackageReference Include="bunit.core" Version="1.3.42" />
     <Content Update="*.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
