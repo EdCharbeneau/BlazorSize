@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bUnitCompatibilityTests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSize.ExampleNet6", "BlazorSize.ExampleNet6\BlazorSize.ExampleNet6.csproj", "{B73F66B5-289A-4876-931C-EF81DABBED03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPro.BlazorSize.UnitTesting", "BlazorSize.UnitTesting\BlazorPro.BlazorSize.UnitTesting.csproj", "{A1361B27-57E2-4A85-AD32-0F6B1CA0C034}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPro.BlazorSize.UnitTesting", "BlazorSize.UnitTesting\BlazorPro.BlazorSize.UnitTesting.csproj", "{A1361B27-57E2-4A85-AD32-0F6B1CA0C034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPro.BlazorSize.BlazorRepl", "BlazorPro.BlazorSize.BlazorRepl\BlazorPro.BlazorSize.BlazorRepl.csproj", "{EFDE2359-ED21-4D36-B069-674369695FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{A1361B27-57E2-4A85-AD32-0F6B1CA0C034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1361B27-57E2-4A85-AD32-0F6B1CA0C034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1361B27-57E2-4A85-AD32-0F6B1CA0C034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFDE2359-ED21-4D36-B069-674369695FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFDE2359-ED21-4D36-B069-674369695FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFDE2359-ED21-4D36-B069-674369695FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFDE2359-ED21-4D36-B069-674369695FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
