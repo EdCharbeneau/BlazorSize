@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tsc -p tsconfig.json && jest && npm run posttest",
     "posttest": "rimraf scripts/tests/*.js",
-    "build": "tsc -p tsconfig.build.json"
+    "prebuild": "rimraf wwwroot",
+    "build": "npm run prebuild && tsc -p tsconfig.build.json"
   },
   "author": "",
   "license": "ISC",
