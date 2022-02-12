@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <Version>6.1.1</Version>
+    <Version>6.1.2-pre</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+		6.1.2 Fixed casing on JS modules, fixes deployment issues on Linux. (regression)
 		6.1.1 Replaced deprecated `addListener` method. Removed console log messages, again.
 		6.1.0 Removed dependency for bUnit.Core. Breaking changes may occur in test projects. Removed console log messages.
 		6.0.0 Fixed possible null issues. .NET 6 support. Moved APIs for bUnit to BlazorPro.BlazorSize.UnitTesting.
@@ -43,8 +44,8 @@
       1.2.0
       Full-release
     </PackageReleaseNotes>
-    <AssemblyVersion>6.1.1.0</AssemblyVersion>
-    <FileVersion>6.1.1.0</FileVersion>
+    <AssemblyVersion>6.1.2.0</AssemblyVersion>
+    <FileVersion>6.1.2.0</FileVersion>
     <PackageId>BlazorPro.BlazorSize</PackageId>
   </PropertyGroup>
 
@@ -76,9 +77,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Pack>False</Pack>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <!-- static resources _content/* -->
