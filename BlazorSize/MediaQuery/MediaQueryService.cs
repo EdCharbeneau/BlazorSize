@@ -46,7 +46,7 @@ namespace BlazorPro.BlazorSize
             if (cache == null) return;
 
             cache.MediaQueries.Remove(mediaQuery);
-            if (cache.MediaQueries.Any())
+            if (!cache.MediaQueries.Any())
             {
                 mediaQueries.Remove(cache);
                 var module = await moduleTask.Value;

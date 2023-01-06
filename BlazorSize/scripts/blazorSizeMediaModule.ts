@@ -2,6 +2,9 @@
 
 let instance = new BlazorSizeMedia();
 
+// Uncomment to enable console inspection of the instance
+// (window as any).bs_instance = instance;
+
 // When MQL is created, it tracks a NET Ref 
 export function addMediaQueryList(dotnet: any) {
     instance.addMediaQueryList(dotnet);
