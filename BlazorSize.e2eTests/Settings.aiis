@@ -149,14 +149,40 @@
           },
           "TechnologyType": 2
         }
+      },
+      "Desktop": {
+        "__type": "ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme",
+        "__value": {
+          "CheckFindParamUniqueness": true,
+          "AutoDetectTestRegions": true,
+          "TryAttributeCombinations": true,
+          "AlwaysAssertTagName": true,
+          "IdentificationsPerTag": {
+            "All Elements": {
+              "__type": "ArtOfTest.Common.Design.Translation.IdentificationDescriptorList",
+              "__value": [
+                {
+                  "__type": "ArtOfTest.WebAii.Design.Translation.Desktop.DesktopIdentificationDescriptor",
+                  "__value": {
+                    "PropertyName": "ControlTypeName",
+                    "IsLocked": true
+                  }
+                }
+              ]
+            }
+          },
+          "TechnologyType": 8
+        }
       }
     },
     "UnitTypeTypeGeneration": 1,
-    "RecorderBaseUrl": "https://localhost:44343/",
+    "RecorderBaseUrl": "https://localhost:7049",
     "IsStoryBoardCapturingEnabled": true,
     "IsElementImageCapturingEnabled": true,
     "UseScreenshotCache": true,
     "EnableImageSearch": true,
+    "UseBrowserExtension": false,
+    "TelerikComponentsVersion": 10000,
     "ScrollOnImageSearch": true,
     "DisplayElementImagePreview": true,
     "ElementImageThreshold": 90,
@@ -188,6 +214,7 @@
     "RecordWpfWindowStateChanged": false,
     "PromptNameOnAddElement": true,
     "DefaultWPFApplication": null,
+    "DefaultDesktopApplication": null,
     "UseLegacySilverlightFindLogic": false,
     "ProjectGuid": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b",
     "SourceControlRepository": null,
@@ -196,16 +223,16 @@
     "ProjectReferences": [
       "System",
       "System.Core",
-      "ArtOfTest.WebAii, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
-      "ArtOfTest.WebAii.Messaging, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
-      "ArtOfTest.WebAii.Design, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
-      "Telerik.WebAii.Controls.Html, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestStudio.Translators.Common, Version=2021.3.1103.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "ArtOfTest.WebAii, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Messaging, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Design, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
+      "Telerik.WebAii.Controls.Html, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestStudio.Translators.Common, Version=2022.3.1201.2, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
       "System.Windows.Forms"
     ],
@@ -213,7 +240,7 @@
     "IsScheduleServerRemote": false,
     "NotificationSettings": null,
     "WebComponents": true,
-    "ProjectVersion": "2021.2.1025.0",
+    "ProjectVersion": "2022.3.1013.0",
     "Namespace": "BlazorSize.e2eTests",
     "AssemblyName": "BlazorSize.e2eTests",
     "OutputFolder": "bin",
@@ -233,6 +260,7 @@
     "ResponsiveBrowserWidth": 768,
     "ResponsiveBrowserHeight": 1024,
     "ResponsiveBrowserUserAgent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1",
-    "ActiveTheme": "Light"
+    "ActiveTheme": "Light",
+    "ShowStepResultDetails": false
   }
 }

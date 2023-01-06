@@ -3,7 +3,7 @@
   "__value": {
     "TestListId": "f9449235-bf5e-4504-8109-14a9a1491f56",
     "Id": "f9449235-bf5e-4504-8109-14a9a1491f56",
-    "TestListName": "BlazorSize .NET 6",
+    "TestListName": "BlazorSize .NET 6 Server",
     "CreationDate": "2021-02-09T13:21:46-05:00",
     "OwnerName": null,
     "Settings": {
@@ -28,9 +28,9 @@
             "LocalWebServer": 0,
             "EnableUILessRequestViewing": false,
             "WebAppPhysicalPath": "",
-            "DefaultBrowser": 10,
+            "DefaultBrowser": 7,
             "EnableScriptLogging": false,
-            "BaseUrl": "https://localhost:44343/",
+            "BaseUrl": "https://localhost:7049",
             "KillBrowserProcessOnClose": false,
             "KillBrowsersBeforeStart": true,
             "AutoCalibrateBrowsers": false,
@@ -39,13 +39,20 @@
             "VerboseHttpProxy": false,
             "SilverlightConnectTimeout": 60000,
             "SilverlightApplicationPath": null,
-            "WebComponents": true
+            "WebComponents": true,
+            "UseBrowserExtension": false
           }
         },
         "Wpf": {
           "__type": "ArtOfTest.WebAii.Core.Settings+WpfSettings",
           "__value": {
             "DefaultApplicationPath": null
+          }
+        },
+        "Desktop": {
+          "__type": "ArtOfTest.WebAii.Core.Settings+DesktopSettings",
+          "__value": {
+            "DefaultApplicationPath": ""
           }
         },
         "CreateLogFile": true,
@@ -76,7 +83,8 @@
         "EnableImageSearch": true,
         "ElementImageSearchTimeout": 15000,
         "ElementImageSearchDelay": 300,
-        "ScrollOnImageSearch": true
+        "ScrollOnImageSearch": true,
+        "TelerikComponentsVersion": 10000
       }
     },
     "Tests": [],

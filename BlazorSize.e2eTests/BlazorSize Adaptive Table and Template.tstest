@@ -1268,6 +1268,8 @@
     "SilverlightAppOriginUri": null,
     "WpfAppPath": null,
     "UseDefaultWpfAppPath": false,
+    "DesktopAppPath": null,
+    "UseDefaultDesktopAppPath": false,
     "TestAssembly": "BlazorSize.e2eTests.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "BlazorSize.e2eTests.BlazorSize_Adaptive_Table_and_Template",
