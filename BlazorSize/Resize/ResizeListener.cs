@@ -10,7 +10,7 @@ namespace BlazorPro.BlazorSize
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
         private readonly ResizeOptions options;
-        
+
         private bool disposed;
         public ResizeListener(IJSRuntime jsRuntime, IOptions<ResizeOptions>? options = null)
         {
@@ -103,13 +103,22 @@ namespace BlazorPro.BlazorSize
 
         public async ValueTask DisposeAsync()
         {
-            if (moduleTask.IsValueCreated)
+            try
             {
-                var module = await moduleTask.Value;
-                await module.DisposeAsync();
+
+
+                if (moduleTask.IsValueCreated)
+                {
+                    var module = await moduleTask.Value;
+                    await module.DisposeAsync();
+                }
+                Dispose(true);
+                GC.SuppressFinalize(this);
             }
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            catch (Exception)
+            {
+                //https://stackoverflow.com/questions/72488563/blazor-server-side-application-throwing-system-invalidoperationexception-javas
+            }
         }
     }
 }

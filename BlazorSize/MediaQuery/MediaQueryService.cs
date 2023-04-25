@@ -42,7 +42,7 @@ namespace BlazorPro.BlazorSize
             if (mediaQuery == null) return;
 
             var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
-           
+
             if (cache == null) return;
 
             cache.MediaQueries.Remove(mediaQuery);
@@ -98,11 +98,20 @@ namespace BlazorPro.BlazorSize
 
         public async ValueTask DisposeAsync()
         {
-            if (DotNetInstance != null)
+            try
             {
-                var module = await moduleTask.Value;
-                await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
-                DotNetInstance.Dispose();
+                if (DotNetInstance != null)
+                {
+                    var module = await moduleTask.Value;
+                    await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
+                    DotNetInstance.Dispose();
+                    await module.DisposeAsync();
+                    GC.SuppressFinalize(this);
+                }
+            }
+            catch (Exception)
+            {
+                //https://stackoverflow.com/questions/72488563/blazor-server-side-application-throwing-system-invalidoperationexception-javas
             }
         }
 
