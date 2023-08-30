@@ -18,15 +18,15 @@ namespace BlazorPro.BlazorSize
 
         // JavaScript uses this value for tracking MediaQueryList instances.
         private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; } = null!;
-        private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
+        private readonly List<MediaQueryCache> mediaQueries = new();
         public List<MediaQueryCache> MediaQueries => mediaQueries;
 
         private MediaQueryCache? GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
 
         public void AddQuery(MediaQuery newMediaQuery)
         {
-            var cache = GetMediaQueryFromCache(byMedia: newMediaQuery.Media);
-            if (cache == null)
+            MediaQueryCache? cache = GetMediaQueryFromCache(byMedia: newMediaQuery.Media);
+            if (cache is null)
             {
                 cache = new MediaQueryCache
                 {
@@ -34,33 +34,39 @@ namespace BlazorPro.BlazorSize
                 };
                 mediaQueries.Add(cache);
             }
-            cache.MediaQueries.Add(newMediaQuery);
+            cache.MediaQueries?.Add(newMediaQuery);
         }
 
         public async Task RemoveQuery(MediaQuery mediaQuery)
         {
-            if (mediaQuery == null) return;
+            if (mediaQuery is null) return;
 
-            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
+            MediaQueryCache? cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
 
-            if (cache == null) return;
+            if (cache is null || cache.MediaQueries is null) return;
 
-            cache.MediaQueries.Remove(mediaQuery);
-            if (!cache.MediaQueries.Any())
+            try
             {
+                cache.MediaQueries.Remove(mediaQuery);
+                if (cache.MediaQueries.Any()) return;
                 mediaQueries.Remove(cache);
-                var module = await moduleTask.Value;
+                IJSObjectReference module = await moduleTask.Value;
                 await module.InvokeVoidAsync($"removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
+            }
+            catch (Exception)
+            {
+                //https://github.com/EdCharbeneau/BlazorSize/issues/93
+                //https://stackoverflow.com/questions/72488563/blazor-server-side-application-throwing-system-invalidoperationexception-javas
             }
         }
 
         public async Task Initialize(MediaQuery mediaQuery)
         {
-            if (mediaQuery?.Media == null) return;
+            if (mediaQuery?.Media is null) return;
             var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
-            if (cache == null) return;
+            if (cache is null) return;
 
-            if (cache.Value == null)
+            if (cache.Value is null)
             {
                 // If we don't flag the cache as loading, duplicate requests will be sent async.
                 // Duplicate requests = poor performance, esp with web sockets.
@@ -73,6 +79,7 @@ namespace BlazorPro.BlazorSize
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
                     // When loading is complete dispatch an update to all subscribers.
+                    cache.MediaQueries ??= new List<MediaQuery>();
                     foreach (var item in cache.MediaQueries)
                     {
                         item.MediaQueryChanged(cache.Value);
@@ -100,17 +107,17 @@ namespace BlazorPro.BlazorSize
         {
             try
             {
-                if (DotNetInstance != null)
-                {
-                    var module = await moduleTask.Value;
-                    await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
-                    DotNetInstance.Dispose();
-                    await module.DisposeAsync();
-                    GC.SuppressFinalize(this);
-                }
+                if (DotNetInstance is null) return;
+                
+                var module = await moduleTask.Value;
+                await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
+                DotNetInstance.Dispose();
+                await module.DisposeAsync();
+                GC.SuppressFinalize(this);
             }
             catch (Exception)
             {
+                //https://github.com/EdCharbeneau/BlazorSize/issues/93
                 //https://stackoverflow.com/questions/72488563/blazor-server-side-application-throwing-system-invalidoperationexception-javas
             }
         }

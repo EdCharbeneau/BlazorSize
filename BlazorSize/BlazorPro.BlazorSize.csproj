@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <Version>6.2.1</Version>
+    <Version>6.2.2</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCh1rbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+		6.2.2 Fixes more codepaths that may result in Microsoft.JSInterop.JSDisconnectedException
 		6.2.1 Fixed Microsoft.JSInterop.JSDisconnectedException
 		6.2.0 Fixed bug where MediaQuery dispose was not always working correctly.
 		6.1.2 Fixed casing on JS modules, fixes deployment issues on Linux. (regression)
