@@ -1549,6 +1549,7 @@
     "SilverlightAppRecordLocal": false,
     "SilverlightAppOriginUri": null,
     "WpfAppPath": null,
+    "AppStartArgs": null,
     "UseDefaultWpfAppPath": false,
     "DesktopAppPath": null,
     "UseDefaultDesktopAppPath": false,
