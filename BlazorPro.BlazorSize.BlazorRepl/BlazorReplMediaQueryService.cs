@@ -20,7 +20,7 @@
 
         // JavaScript uses this value for tracking MediaQueryList instances.
         private DotNetObjectReference<MediaQueryList> DotNetInstance { get; set; } = null!;
-        private readonly List<MediaQueryCache> mediaQueries = new List<MediaQueryCache>();
+        private readonly List<MediaQueryCache> mediaQueries = new();
         public List<MediaQueryCache> MediaQueries => mediaQueries;
 
         private MediaQueryCache? GetMediaQueryFromCache(string byMedia) => mediaQueries?.Find(q => q.MediaRequested == byMedia);
@@ -36,23 +36,28 @@
                 };
                 mediaQueries.Add(cache);
             }
-            cache.MediaQueries.Add(newMediaQuery);
+            cache.MediaQueries?.Add(newMediaQuery);
         }
 
         public async Task RemoveQuery(MediaQuery mediaQuery)
         {
             if (mediaQuery == null) return;
 
-            var cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
+            MediaQueryCache? cache = GetMediaQueryFromCache(byMedia: mediaQuery.Media);
 
-            if (cache == null) return;
+            if (cache == null || cache.MediaQueries == null) return;
 
-            cache.MediaQueries.Remove(mediaQuery);
-            if (cache.MediaQueries.Any())
+            try
             {
+                cache.MediaQueries.Remove(mediaQuery);
+                if (cache.MediaQueries.Any()) return;
                 mediaQueries.Remove(cache);
-                var module = await moduleTask.Value;
+                IJSObjectReference module = await moduleTask.Value;
                 await module.InvokeVoidAsync($"removeMediaQuery", DotNetInstance, mediaQuery.InternalMedia.Media);
+            }
+            catch (Exception)
+            {
+                //https://stackoverflow.com/questions/72488563/blazor-server-side-application-throwing-system-invalidoperationexception-javas
             }
         }
 
@@ -75,6 +80,7 @@
                     cache.Value = await task;
                     cache.Loading = task.IsCompleted;
                     // When loading is complete dispatch an update to all subscribers.
+                    if (cache.MediaQueries is null) return;
                     foreach (var item in cache.MediaQueries)
                     {
                         item.MediaQueryChanged(cache.Value);
@@ -100,11 +106,12 @@
 
         public async ValueTask DisposeAsync()
         {
-            if (DotNetInstance != null)
+            if (DotNetInstance is not null)
             {
                 var module = await moduleTask.Value;
                 await module.InvokeVoidAsync("removeMediaQueryList", DotNetInstance);
                 DotNetInstance.Dispose();
+                GC.SuppressFinalize(this);
             }
         }
     }

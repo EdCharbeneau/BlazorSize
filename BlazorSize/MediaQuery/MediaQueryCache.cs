@@ -21,7 +21,8 @@ namespace BlazorPro.BlazorSize
         /// <summary>
         /// Media Queries that share a RequestedMedia value. Used to aggregate event handlers and minimize JS calls.
         /// </summary>
-        public List<MediaQuery> MediaQueries { get; set; } = new List<MediaQuery>();
+        // Nullable because Blazor's lifecycle sometimes GC's this object before the cleanup routines are finished.
+        public List<MediaQuery>? MediaQueries { get; set; } = new List<MediaQuery>();
     }
 }
 

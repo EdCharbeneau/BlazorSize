@@ -44,6 +44,7 @@ namespace BlazorPro.BlazorSize
             if (cache is null) return;
 
             // Dispatch events to all subscribers
+            if (cache.MediaQueries is null) return;
             foreach (var item in cache.MediaQueries)
             {
                 item.MediaQueryChanged(args);
