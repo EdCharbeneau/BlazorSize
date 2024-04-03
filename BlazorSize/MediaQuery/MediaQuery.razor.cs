@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
@@ -84,7 +85,17 @@ namespace BlazorPro.BlazorSize
         public async ValueTask DisposeAsync()
         {
             if (MediaQueryList == null) return;
-            await MediaQueryList.RemoveQuery(this);
+
+            try
+            {
+                await MediaQueryList.RemoveQuery(this);
+            }
+            catch (JSDisconnectedException jsEx)
+            {
+                // Ignore 
+                //https://github.com/EdCharbeneau/BlazorSize/issues/93
+            }
+
         }
     }
 }
