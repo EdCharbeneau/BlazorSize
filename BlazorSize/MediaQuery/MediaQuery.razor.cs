@@ -51,7 +51,7 @@ namespace BlazorPro.BlazorSize
         {
             if (MediaQueryList == null)
             {
-                throw new Exception("MediaQueryList is null. The MediaQueryList component should be added to the root or MainLayout of your applicaiton.");
+                throw new NullReferenceException("MediaQueryList is null. The MediaQueryList component should be added to the root or MainLayout of your application. Or, set an interactive mode, BlazorSize requires an interactive rendermode.");
             }
             else
             {
