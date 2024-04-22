@@ -3,7 +3,7 @@
   "__value": {
     "TestListId": "f9449235-bf5e-4504-8109-14a9a1491f56",
     "Id": "f9449235-bf5e-4504-8109-14a9a1491f56",
-    "TestListName": "BlazorSize .NET 6 Server",
+    "TestListName": "BlazorSize .NET Web App",
     "CreationDate": "2021-02-09T13:21:46-05:00",
     "OwnerName": null,
     "Settings": {
@@ -30,7 +30,7 @@
             "WebAppPhysicalPath": "",
             "DefaultBrowser": 7,
             "EnableScriptLogging": false,
-            "BaseUrl": "https://localhost:7049",
+            "BaseUrl": "https://localhost:7249/",
             "KillBrowserProcessOnClose": false,
             "KillBrowsersBeforeStart": true,
             "AutoCalibrateBrowsers": false,
@@ -40,19 +40,23 @@
             "SilverlightConnectTimeout": 60000,
             "SilverlightApplicationPath": null,
             "WebComponents": true,
-            "UseBrowserExtension": false
+            "UseBrowserExtension": false,
+            "ChromiumFirstInteractionDelay": 500,
+            "FirefoxMinimumJSClickDelay": 100
           }
         },
         "Wpf": {
           "__type": "ArtOfTest.WebAii.Core.Settings+WpfSettings",
           "__value": {
-            "DefaultApplicationPath": null
+            "DefaultApplicationPath": null,
+            "DefaultApplicationArgs": ""
           }
         },
         "Desktop": {
           "__type": "ArtOfTest.WebAii.Core.Settings+DesktopSettings",
           "__value": {
-            "DefaultApplicationPath": ""
+            "DefaultApplicationPath": "",
+            "DefaultApplicationArgs": ""
           }
         },
         "CreateLogFile": true,

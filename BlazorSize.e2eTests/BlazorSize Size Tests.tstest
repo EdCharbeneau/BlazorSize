@@ -2,6 +2,7 @@
   "__type": "ArtOfTest.WebAii.Design.ProjectModel.Test",
   "__value": {
     "DomStatesCounter": {},
+    "AppStartSkip": false,
     "WebKitExecutionDelay": 0,
     "ReuseAppWindow": 0,
     "ProfilerResultsDirectory": null,
@@ -122,7 +123,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "Yy3DggN6xFsrccnCJvv4sjvM0JI=",
+                          "uniqueKey": "neUl9lKN4HGgqNks3n0i1VDP/5GYJhJ88g2NjdOq+BM=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "ResponsiveH1Tag",
@@ -275,6 +276,46 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
+            "Runtime ID": "016ed63c-0292-4688-aa60-eaea2bd83dd4",
+            "Description": "Wait for '1000' msec.",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.SleepActionDescriptor",
+              "__value": {
+                "WaitTime": 1000,
+                "WaitOnElements": true,
+                "WaitOnElementsTimeout": 30000,
+                "UseStepWaitOnElementsTimout": false,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 5,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "BlazorSize Size Testslxzynrqp.g3i",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
             "Runtime ID": "a29f97ab-a1fe-4eb2-9bbd-46f5df7162fc",
             "Description": "Verify 'class' attribute 'Same' value 'list-group-item active' on 'LargeListItem'",
             "CustomDescription": null,
@@ -324,7 +365,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "PpCvJORTsojfAXkKmiRRuah+Zg0=",
+                          "uniqueKey": "xPDk8Sy/hCTVgY2sux2Tei2rzuvq45j6n1HA89zwWr4=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "LargeListItem",
@@ -388,7 +429,7 @@
               }
             },
             "Enabled": true,
-            "Order": 5,
+            "Order": 6,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -450,7 +491,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "D/lTDrOcn/HiMfpgpvswAAEyZq0=",
+                          "uniqueKey": "rOTMBUCYqSujyojY18Iy0HS0VAeuik/h1+AgE5zEuzE=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "MediumListItem",
@@ -514,7 +555,7 @@
               }
             },
             "Enabled": true,
-            "Order": 6,
+            "Order": 7,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -576,7 +617,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "Uap/xkfXuWX7r1GbF/k776peZgA=",
+                          "uniqueKey": "djELA1nuWR8aZb4NWq+LKbZV8WhPWpib0942lnj+dkw=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "SmallListItem",
@@ -640,7 +681,7 @@
               }
             },
             "Enabled": true,
-            "Order": 7,
+            "Order": 8,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -681,7 +722,7 @@
               }
             },
             "Enabled": true,
-            "Order": 8,
+            "Order": 9,
             "Id": "Resize_Tablet",
             "StepState": 1,
             "ContinueOnFailure": false,
@@ -743,7 +784,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "PpCvJORTsojfAXkKmiRRuah+Zg0=",
+                          "uniqueKey": "xPDk8Sy/hCTVgY2sux2Tei2rzuvq45j6n1HA89zwWr4=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "LargeListItem",
@@ -807,7 +848,7 @@
               }
             },
             "Enabled": true,
-            "Order": 9,
+            "Order": 10,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -869,7 +910,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "D/lTDrOcn/HiMfpgpvswAAEyZq0=",
+                          "uniqueKey": "rOTMBUCYqSujyojY18Iy0HS0VAeuik/h1+AgE5zEuzE=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "MediumListItem",
@@ -933,7 +974,7 @@
               }
             },
             "Enabled": true,
-            "Order": 10,
+            "Order": 11,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -995,7 +1036,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "Uap/xkfXuWX7r1GbF/k776peZgA=",
+                          "uniqueKey": "djELA1nuWR8aZb4NWq+LKbZV8WhPWpib0942lnj+dkw=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "SmallListItem",
@@ -1059,7 +1100,7 @@
               }
             },
             "Enabled": true,
-            "Order": 11,
+            "Order": 12,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -1100,7 +1141,7 @@
               }
             },
             "Enabled": true,
-            "Order": 12,
+            "Order": 13,
             "Id": "Resize_Mobile",
             "StepState": 1,
             "ContinueOnFailure": false,
@@ -1162,7 +1203,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "PpCvJORTsojfAXkKmiRRuah+Zg0=",
+                          "uniqueKey": "xPDk8Sy/hCTVgY2sux2Tei2rzuvq45j6n1HA89zwWr4=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "LargeListItem",
@@ -1226,7 +1267,7 @@
               }
             },
             "Enabled": true,
-            "Order": 13,
+            "Order": 14,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -1288,7 +1329,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "D/lTDrOcn/HiMfpgpvswAAEyZq0=",
+                          "uniqueKey": "rOTMBUCYqSujyojY18Iy0HS0VAeuik/h1+AgE5zEuzE=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "MediumListItem",
@@ -1352,7 +1393,7 @@
               }
             },
             "Enabled": true,
-            "Order": 14,
+            "Order": 15,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -1414,7 +1455,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "Uap/xkfXuWX7r1GbF/k776peZgA=",
+                          "uniqueKey": "djELA1nuWR8aZb4NWq+LKbZV8WhPWpib0942lnj+dkw=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "SmallListItem",
@@ -1478,7 +1519,7 @@
               }
             },
             "Enabled": true,
-            "Order": 15,
+            "Order": 16,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
@@ -1527,11 +1568,54 @@
               }
             },
             "Enabled": true,
-            "Order": 16,
+            "Order": 17,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
             "StepImageKey": "CanIResizetv5fnucy.hr0",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "c0e31336-6a32-4ea8-9685-a7b7539a9270",
+            "Description": "'Maximize' the browser.",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ChangeBrowserStateActionDescriptor",
+              "__value": {
+                "BrowserStateAction": 0,
+                "WaitOnElements": true,
+                "WaitOnElementsTimeout": 30000,
+                "UseStepWaitOnElementsTimout": false,
+                "SearchByImageFirst": 0,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
+                "UsejQuery": false,
+                "Pause": 0,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 18,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "BlazorSize Size Testsvhczkxfz.drc",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -1555,7 +1639,6 @@
     "TestAssembly": "BlazorSize.e2eTests.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "BlazorSize.e2eTests.CanIResize",
-    "IsManual": false,
     "ResourceFilePath": "BlazorSize Size Tests.resx",
     "ElementImageStoreFilePath": "BlazorSize Size Tests.imgstore",
     "HasCodeBehind": true,
@@ -1585,9 +1668,6 @@
     "StopTestListOnFailure": false,
     "InheritParentDataSource": false,
     "BrowserType": 0,
-    "QcId": 0,
-    "QcFilePath": null,
-    "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
     "Name": "BlazorSize Size Tests",
@@ -1598,6 +1678,6 @@
     "UniqueId": "1c6f74bd-1a14-4014-a8c9-02fdb3cb8302",
     "Id": "1c6f74bd-1a14-4014-a8c9-02fdb3cb8302",
     "ProjectId": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b",
-    "Version": 200
+    "Version": 210
   }
 }

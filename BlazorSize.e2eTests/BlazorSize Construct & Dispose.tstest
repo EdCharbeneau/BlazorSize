@@ -2,6 +2,7 @@
   "__type": "ArtOfTest.WebAii.Design.ProjectModel.Test",
   "__value": {
     "DomStatesCounter": {},
+    "AppStartSkip": false,
     "WebKitExecutionDelay": 0,
     "ReuseAppWindow": 0,
     "ProfilerResultsDirectory": null,
@@ -171,7 +172,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "xSZ2+A+tVymXvtXeIM0exvSFsLY=",
+                          "uniqueKey": "NBzChnnFYwZAScbK4jnSwxhUUpQztUnxarOqJ0H9xV4=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "TestDisposeLink",
@@ -343,7 +344,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "GX55Kz9wLvGF2s8hr8yXVoLJtpw=",
+                          "uniqueKey": "/2ti0epSUj9L8N9PKVg4wOzJpaksVni7Vv3uEYuhEBM=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "FetchDataLink",
@@ -515,7 +516,7 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "WWJ9dDVoWzDii4tVaf6YwPx8LC0=",
+                          "uniqueKey": "PWvK5XdBu6xfGnnJEanmXSDU6UjMtybtzCluPBp9W0k=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
                           "Name": "Div",
@@ -601,7 +602,6 @@
     "TestAssembly": "BlazorSize.e2eTests.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "",
-    "IsManual": false,
     "ResourceFilePath": "BlazorSize Construct & Dispose.resx",
     "ElementImageStoreFilePath": "BlazorSize Construct & Dispose.imgstore",
     "HasCodeBehind": false,
@@ -628,9 +628,6 @@
     "StopTestListOnFailure": false,
     "InheritParentDataSource": false,
     "BrowserType": 0,
-    "QcId": 0,
-    "QcFilePath": null,
-    "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
     "Name": "BlazorSize Construct & Dispose",
@@ -641,6 +638,6 @@
     "UniqueId": "4606a41e-798b-45f4-af04-539f9e05d35e",
     "Id": "4606a41e-798b-45f4-af04-539f9e05d35e",
     "ProjectId": "1f8b050d-e725-4ceb-b9a0-6eab12b5769b",
-    "Version": 200
+    "Version": 210
   }
 }
