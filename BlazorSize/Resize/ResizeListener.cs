@@ -48,10 +48,10 @@ namespace BlazorPro.BlazorSize
             onResized += value;
         }
 
-        private async ValueTask<bool> Start()
+        private async ValueTask Start()
         {
             var module = await moduleTask.Value;
-            return await module.InvokeAsync<bool>("listenForResize", DotNetObjectReference.Create(this), options);
+            await module.InvokeVoidAsync("listenForResize", DotNetObjectReference.Create(this), options);
         }
 
         private async ValueTask Cancel()
