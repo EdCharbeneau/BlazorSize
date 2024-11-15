@@ -90,7 +90,7 @@ namespace BlazorPro.BlazorSize
             {
                 await MediaQueryList.RemoveQuery(this);
             }
-            catch (JSDisconnectedException _)
+            catch (JSDisconnectedException)
             {
                 // Ignore 
                 //https://github.com/EdCharbeneau/BlazorSize/issues/93

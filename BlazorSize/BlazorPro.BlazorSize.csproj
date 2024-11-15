@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <Version>9.0.0-preview</Version>
+    <Version>9.0.0</Version>
     <Authors>Ed Charbeneau</Authors>
     <Company>EdCharbeneau.com</Company>
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
@@ -55,9 +55,9 @@
 
   <!--<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">-->
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.0-rc.1.24452.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0-rc.1.24452.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 
   <!-- NuGet info -->
