@@ -11,11 +11,13 @@
     <Description>A JavaScript interop for Blazor used to detect the browser's screen size and perform Media Query tests. BlazorSize uses the DOM API `matchMedia` to test screen size. BlazorSize was created to allow Blazor components to render adaptively.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/EdCharbeneau/BlazorSize</PackageProjectUrl>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageIcon>blazor-glove-128.jpg</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/EdCharbeneau/BlazorSize</RepositoryUrl>
     <PackageTags>Blazor, JavaScript Interop</PackageTags>
     <PackageReleaseNotes>
+		9.0.0 Fixes issue with UnobservedTaskExceptions
 		8.0.0 Adds support for .NET 8 interactive modes
 		6.2.2 Fixes more codepaths that may result in Microsoft.JSInterop.JSDisconnectedException
 		6.2.1 Fixed Microsoft.JSInterop.JSDisconnectedException
@@ -62,6 +64,7 @@
 
   <!-- NuGet info -->
   <ItemGroup>
+	  <None Include="readme.md" Pack="true" PackagePath="\"/>
     <!-- Package Logo -->
     <None Include="..\_resources\blazor-glove-128.jpg">
       <Pack>True</Pack>
