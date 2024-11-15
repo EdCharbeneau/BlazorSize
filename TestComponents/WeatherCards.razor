@@ -6,7 +6,7 @@ else
 {
     foreach (var t in Data.Select((x,i) => new { Forecast = x, Index = i }))
     {
-        <div id="card_@t.Index" class="card">
+        <div id="card_@t.Index" class="card" data-testid="weather-card-@t.Index">
             <div class="card-body">
                 <h5 class="card-title">@t.Forecast.Date.DayOfWeek</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@t.Forecast.Date.ToShortDateString()</h6>
